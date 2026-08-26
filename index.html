@@ -20,8 +20,6 @@
             --danger-dark: #ea2b2b;
             --primary: #1cb0f6;
             --primary-dark: #1899d6;
-            --duel-color: #ce82ff;
-            --duel-dark: #a558d6;
         }
 
         html, body {
@@ -35,100 +33,107 @@
 
         .app-container {
             display: flex; flex-direction: column; height: 100vh;
-            max-width: 600px; margin: 0 auto; padding: 12px;
+            max-width: 600px; margin: 0 auto; padding: 10px;
         }
 
         .top-bar {
             display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 12px; flex-shrink: 0;
+            margin-bottom: 8px; flex-shrink: 0;
         }
         
         .back-btn {
             background: #233642; border: 2px solid var(--border-dark);
             border-bottom-width: 4px; color: var(--text-main);
-            padding: 8px 14px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 13px;
+            padding: 6px 12px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 12px;
         }
         .back-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
         .card { 
-            background: var(--card-dark); border-radius: 20px; padding: 16px; 
+            background: var(--card-dark); border-radius: 20px; padding: 14px; 
             border: 2px solid var(--border-dark); border-bottom-width: 6px; 
             display: flex; flex-direction: column; flex: 1;
-            overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.4); margin-bottom: 10px;
+            overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.4); margin-bottom: 6px;
         }
 
         .tag { 
             display: inline-block; background: #253b47; color: var(--primary); 
             font-size: 10px; font-weight: 800; text-transform: uppercase;
-            padding: 4px 10px; border-radius: 20px; margin-bottom: 8px; align-self: flex-start;
+            padding: 3px 8px; border-radius: 20px; margin-bottom: 6px; align-self: flex-start;
         }
 
         .filter-box { 
-            margin-bottom: 10px; background: var(--card-dark); padding: 10px; 
-            border-radius: 16px; border: 2px solid var(--border-dark); flex-shrink: 0;
+            margin-bottom: 8px; background: var(--card-dark); padding: 8px; 
+            border-radius: 14px; border: 2px solid var(--border-dark); flex-shrink: 0;
         }
 
         select, input[type="text"] { 
-            padding: 10px; font-size: 14px; border-radius: 12px; 
+            padding: 8px; font-size: 13px; border-radius: 10px; 
             border: 2px solid var(--border-dark); width: 100%; margin-top: 4px; 
             background: #111a21; color: var(--text-main); outline: none; font-weight: 700;
         }
 
+        /* Fastlåst svarkontainer så knapperne aldrig forsvinder */
         .options-container {
-            display: flex; flex-direction: column; gap: 8px; margin-top: 8px;
-            overflow-y: auto; flex: 1; padding-right: 2px;
+            display: flex; flex-direction: column; gap: 6px; margin-top: 6px;
+            flex-shrink: 0;
         }
 
         .btn { 
-            display: block; width: 100%; text-align: left; padding: 12px 14px; 
-            border: 2px solid var(--border-dark); border-bottom-width: 4px; border-radius: 14px; 
-            background: #233642; cursor: pointer; font-size: 14px; font-weight: 700;
-            color: var(--text-main); flex-shrink: 0; transition: all 0.1s;
+            display: block; width: 100%; text-align: left; padding: 10px 12px; 
+            border: 2px solid var(--border-dark); border-bottom-width: 4px; border-radius: 12px; 
+            background: #233642; cursor: pointer; font-size: 13px; font-weight: 700;
+            color: var(--text-main); transition: all 0.1s;
         }
         .btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 
-        .correct { background-color: #1b4d2e !important; border-color: var(--success) !important; border-bottom-width: 4px !important; color: #d1fae5 !important; }
-        .wrong { background-color: #4d1b1b !important; border-color: var(--danger) !important; border-bottom-width: 4px !important; color: #fee2e2 !important; }
+        .correct { background-color: #1b4d2e !important; border-color: var(--success) !important; color: #d1fae5 !important; }
+        .wrong { background-color: #4d1b1b !important; border-color: var(--danger) !important; color: #fee2e2 !important; }
 
         .explanation { 
-            margin-top: 8px; padding: 10px; background: #11261d; border: 2px solid #1e4630;
-            border-radius: 12px; font-size: 12px; display: none; color: #a7f3d0;
-            max-height: 90px; overflow-y: auto; flex-shrink: 0;
+            margin-top: 6px; padding: 8px; background: #11261d; border: 2px solid #1e4630;
+            border-radius: 10px; font-size: 11px; display: none; color: #a7f3d0;
+            max-height: 70px; overflow-y: auto; flex-shrink: 0;
         }
 
         .next-btn { 
             background: var(--success); border-bottom: 4px solid var(--success-dark);
-            color: white; border-radius: 14px; cursor: pointer; padding: 12px; 
-            display: none; font-weight: 800; font-size: 15px; width: 100%; 
-            text-align: center; margin-top: 8px; flex-shrink: 0;
+            color: white; border-radius: 12px; cursor: pointer; padding: 10px; 
+            display: none; font-weight: 800; font-size: 14px; width: 100%; 
+            text-align: center; margin-top: 6px; flex-shrink: 0;
         }
         .next-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
-        .score { font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .score { font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         
-        .progress-bar-container { width: 100%; background: #2b414d; height: 8px; border-radius: 4px; margin-bottom: 10px; overflow: hidden; flex-shrink: 0; }
-        .progress-bar-fill { height: 100%; background: var(--success); width: 0%; border-radius: 4px; transition: width 0.3s ease; }
+        .progress-bar-container { width: 100%; background: #2b414d; height: 6px; border-radius: 3px; margin-bottom: 8px; overflow: hidden; flex-shrink: 0; }
+        .progress-bar-fill { height: 100%; background: var(--success); width: 0%; border-radius: 3px; transition: width 0.3s ease; }
 
-        .restart-btn { background: var(--primary); border-bottom: 4px solid var(--primary-dark); color: white; border-radius: 14px; cursor: pointer; font-weight: 800; font-size: 14px; padding: 12px; width: 100%; margin-top: 8px; }
+        .restart-btn { background: var(--primary); border-bottom: 4px solid var(--primary-dark); color: white; border-radius: 12px; cursor: pointer; padding: 10px; width: 100%; margin-top: 6px; font-weight: 800; font-size: 13px; }
 
-        .menu-grid { display: flex; flex-direction: column; gap: 10px; justify-content: center; flex: 1; overflow-y: auto; padding-right: 4px; }
-        .menu-btn { background: var(--card-dark); border: 2px solid var(--border-dark); border-bottom-width: 5px; color: var(--text-main); padding: 14px; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; text-align: left; display: flex; align-items: center; gap: 12px; transition: all 0.1s; flex-shrink: 0; }
+        .menu-grid { display: flex; flex-direction: column; gap: 8px; justify-content: center; flex: 1; overflow-y: auto; padding-right: 2px; }
+        .menu-btn { background: var(--card-dark); border: 2px solid var(--border-dark); border-bottom-width: 5px; color: var(--text-main); padding: 12px; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; text-align: left; display: flex; align-items: center; gap: 10px; transition: all 0.1s; flex-shrink: 0; }
         .menu-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
-        .menu-btn span { font-size: 22px; }
+        .menu-btn span { font-size: 20px; }
 
-        .duel-box { border: 2px dashed var(--border-dark); padding: 12px; border-radius: 14px; margin-bottom: 8px; text-align: center; background: #17242c; }
-        .login-btn { background: var(--primary); border-bottom: 4px solid var(--primary-dark); color: white; border-radius: 12px; cursor: pointer; padding: 10px; width: 100%; font-weight: 800; font-size: 14px; margin-top: 6px; border:none; }
-        .login-btn:active { transform: translateY(2px); border-bottom-width: 0; margin-bottom: 4px;}
-        
-        .chat-container { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; margin-bottom: 10px; }
-        .bubble { padding: 12px 14px; border-radius: 16px; font-size: 13px; line-height: 1.4; max-width: 85%; word-wrap: break-word; }
+        /* Rollespil / Chat layout specifikt fix */
+        .chat-container { 
+            flex: 1; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            padding-right: 2px; 
+            margin-bottom: 6px;
+            max-height: calc(100vh - 220px);
+        }
+        .bubble { padding: 10px 12px; border-radius: 14px; font-size: 12px; line-height: 1.3; max-width: 90%; word-wrap: break-word; }
         .bubble-sensor { background: #233642; border: 1px solid var(--border-dark); align-self: flex-start; border-bottom-left-radius: 4px; color: #fff; }
         .bubble-user { background: var(--primary-dark); align-self: flex-end; border-bottom-right-radius: 4px; color: #fff; }
-        .dialog-feedback { font-size: 12px; color: var(--success); font-weight: 700; text-align: center; margin-bottom: 5px; }
+        .dialog-feedback { font-size: 11px; color: var(--success); font-weight: 700; text-align: center; margin-bottom: 4px; flex-shrink: 0; }
         
-        .wiki-item { background: #111a21; border: 1px solid var(--border-dark); padding: 12px; border-radius: 12px; margin-bottom: 8px; }
-        .wiki-title { font-weight: 800; color: var(--primary); font-size: 14px; margin-bottom: 4px; display: flex; justify-content: space-between;}
-        .wiki-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+        .wiki-item { background: #111a21; border: 1px solid var(--border-dark); padding: 10px; border-radius: 10px; margin-bottom: 6px; }
+        .wiki-title { font-weight: 800; color: var(--primary); font-size: 13px; margin-bottom: 2px; display: flex; justify-content: space-between;}
+        .wiki-desc { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
     </style>
 </head>
 <body>
@@ -137,25 +142,25 @@
         
         <!-- FORSIDE / MENU -->
         <div id="home-section" style="display: flex; flex-direction: column; height: 100%;">
-            <div class="card" style="justify-content: space-between; text-align: center; padding: 20px;">
-                <div style="margin-bottom: 15px;">
-                    <span style="font-size: 32px;">🛡️</span>
-                    <h2 style="margin: 5px 0; font-size: 20px;">IDD 3.58 - Rådgivning</h2>
-                    <p style="color: var(--text-muted); font-size: 12px; margin: 0;">Officielt pensum og træning</p>
+            <div class="card" style="justify-content: space-between; text-align: center; padding: 16px;">
+                <div style="margin-bottom: 10px;">
+                    <span style="font-size: 28px;">🛡️</span>
+                    <h2 style="margin: 4px 0; font-size: 18px;">IDD 3.58 - Rådgivning</h2>
+                    <p style="color: var(--text-muted); font-size: 11px; margin: 0;">Officielt pensum og mængdetræning</p>
                 </div>
 
                 <div class="menu-grid">
                     <button class="menu-btn" onclick="skiftFane('quiz')" style="border-color: #58cc02; background: #1b4d2e;">
-                        <span>🎯</span> <div><div>Pensum Træning</div><div style="font-size: 11px; color: #a7f3d0; font-weight: normal;">Træn alle kategorier (Lønsomhed, Etik m.m.)</div></div>
+                        <span>🎯</span> <div><div>Pensum Træning</div><div style="font-size: 10px; color: #a7f3d0; font-weight: normal;">Massevis af opgaver i alle emner</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('dialog')" style="border-color: #ff4b4b; background: #4d1b1b;">
-                        <span>🗣️</span> <div><div>Rollespil (Kundeflows)</div><div style="font-size: 11px; color: #fecaca; font-weight: normal;">Træn dynamiske kundesamtaler</div></div>
+                        <span>🗣️</span> <div><div>Rollespil (Kundeflows)</div><div style="font-size: 10px; color: #fecaca; font-weight: normal;">Dynamiske samtaler med fast låst layout</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('wiki')" style="border-color: #ff9600; background: #452b11;">
-                        <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 11px; color: #fde68a; font-weight: normal;">Søg i AFTL, FAL og dækninger</div></div>
+                        <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 10px; color: #fde68a; font-weight: normal;">Søg i AFTL, FAL og begreber</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('exam')" style="border-color: #1cb0f6; background: #153342;">
-                        <span>⏱️</span> <div><div>Eksamenstest</div><div style="font-size: 11px; color: #bae6fd; font-weight: normal;">40 spørgsmål - 60 minutter</div></div>
+                        <span>⏱️</span> <div><div>Eksamenstest</div><div style="font-size: 10px; color: #bae6fd; font-weight: normal;">40 spørgsmål - 60 minutter</div></div>
                     </button>
                 </div>
             </div>
@@ -165,22 +170,21 @@
         <div id="game-container" style="display: none; flex-direction: column; height: 100%;">
             <div class="top-bar">
                 <button class="back-btn" onclick="gaaTilForside()">🏠 Menu</button>
-                <span id="active-title" style="font-weight: 800; font-size: 13px; color: var(--text-muted);">...</span>
+                <span id="active-title" style="font-weight: 800; font-size: 12px; color: var(--text-muted);">...</span>
             </div>
 
             <!-- SEKTION 1: TRÆNING -->
             <div id="quiz-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="filter-box">
-                    <label for="category-select" style="font-weight: 800; font-size: 12px; color: var(--text-muted);">VÆLG PENSUM EMNE:</label>
+                    <label for="category-select" style="font-weight: 800; font-size: 11px; color: var(--text-muted);">VÆLG PENSUM EMNE:</label>
                     <select id="category-select" onchange="filterAndRestart()">
                         <option value="alle">Alle emner (Blandet)</option>
-                        <option value="fejl" id="fejl-option">❌ Mine fejl (0)</option>
                         <option value="Produkter">Produkter og tilvalgsdækninger</option>
-                        <option value="Tegning">Forsikringens tegning</option>
+                        <option value="Tegning">Forsikringens tegning (AFTL)</option>
                         <option value="Ændringer">Ændringer i løbetid</option>
-                        <option value="Skadesituationen">Skadesituationen</option>
+                        <option value="Skadesituationen">Skadesituationen (FAL)</option>
                         <option value="Lønsomhed">Lønsomhed og kundeloyalitet</option>
-                        <option value="Etik">Etik i salget</option>
+                        <option value="Etik">Etik i salget (God skik)</option>
                         <option value="Samtalestruktur">Samtalestruktur</option>
                     </select>
                 </div>
@@ -192,7 +196,7 @@
                     </div>
                     <div class="progress-bar-container"><div id="progress-bar-fill" class="progress-bar-fill"></div></div>
                     <span id="category-tag" class="tag">Kategori</span>
-                    <h3 id="question-text" style="margin: 0 0 8px 0; font-size: 14px; line-height: 1.3;">Henter spørgsmål...</h3>
+                    <h3 id="question-text" style="margin: 0 0 6px 0; font-size: 13px; line-height: 1.3;">Henter spørgsmål...</h3>
                     <div id="options-container" class="options-container"></div>
                     <div id="explanation-box" class="explanation">
                         <strong>💡 Faglig begrundelse:</strong>
@@ -205,19 +209,19 @@
             <!-- SEKTION 4: SAMTALE / ROLLESPIL -->
             <div id="dialog-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="filter-box">
-                    <label style="font-weight: 800; font-size: 12px; color: var(--text-muted);">VÆLG ROLLESPIL:</label>
+                    <label style="font-weight: 800; font-size: 11px; color: var(--text-muted);">VÆLG ROLLESPIL:</label>
                     <select id="case-select" onchange="startNyCase()">
-                        <option value="case3">🔥 Samlet Kundeflow: Ny Helkunde</option>
+                        <option value="case3">🔥 Samlet Kundeflow: Ny Helkunde (Rækkehus)</option>
                         <option value="case1">Kunde: Henrik (Aftaleloven - Tilbud)</option>
                         <option value="case2">Kunde: Sanne (FAL - Overforsikring)</option>
                     </select>
                 </div>
 
-                <div class="card" style="flex: 1; padding: 10px; display: flex; flex-direction: column;">
+                <div class="card" style="flex: 1; padding: 10px; display: flex; flex-direction: column; overflow: hidden;">
                     <div id="dialog-history" class="chat-container"></div>
                     <div id="dialog-feedback" class="dialog-feedback"></div>
-                    <div id="dialog-options" class="options-container" style="flex: none; margin-top:0;"></div>
-                    <button id="dialog-next-btn" class="next-btn" style="display: none;" onclick="naesteDialogSkridt()">Fortsæt Samtalen →</button>
+                    <div id="dialog-options" class="options-container" style="flex-shrink: 0;"></div>
+                    <button id="dialog-next-btn" class="next-btn" onclick="naesteDialogSkridt()">Fortsæt Samtalen →</button>
                     <button id="dialog-restart-btn" class="restart-btn" style="display: none;" onclick="startNyCase()">Prøv Igen 🔄</button>
                 </div>
             </div>
@@ -225,17 +229,17 @@
             <!-- SEKTION 5: OPSLAGSVÆRK -->
             <div id="wiki-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card">
-                    <h3 style="font-size: 16px; margin-top:0;">📖 Opslagsværk</h3>
+                    <h3 style="font-size: 15px; margin-top:0;">📖 Opslagsværk</h3>
                     <input type="text" id="wiki-search" placeholder="Søg på FAL, AFTL, Pro-rata..." onkeyup="sogIOpslagsvaerk()">
-                    <div class="options-container" id="wiki-results" style="margin-top: 8px;"></div>
+                    <div class="options-container" id="wiki-results" style="margin-top: 6px; overflow-y: auto; flex:1;"></div>
                 </div>
             </div>
 
-            <!-- SEKTION EKSAMEN STUB -->
+            <!-- EKSAMEN STUB -->
             <div id="exam-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card" style="justify-content: center; text-align: center;">
-                    <h3>Eksamen</h3><p>Starter simuleret test...</p>
-                    <button class="login-btn" onclick="gaaTilForside()">Tilbage</button>
+                    <h3>Eksamenstest</h3><p style="font-size: 12px; color:var(--text-muted);">Simuleret 40-spørgsmåls prøve.</p>
+                    <button class="login-btn" onclick="gaaTilForside()">Tilbage til Menu</button>
                 </div>
             </div>
         </div>
@@ -257,68 +261,49 @@ function skiftFane(fane) {
 function gaaTilForside() { document.getElementById("game-container").style.display = "none"; document.getElementById("home-section").style.display = "flex"; }
 
 // ==========================================
-// 1. OPSLAGSVÆRK DATA & LOGIK (NY!)
+// OPSLAGSVÆRK DATA
 // ==========================================
 const opslagsData = [
-    { emne: "Berigelsesforbuddet", kat: "FAL § 39", tekst: "Grundprincip: Man må ikke opnå en økonomisk vinding ved en skade. Erstatningen kan aldrig overstige det faktiske lidte tab, selvom summen er sat højere (Overforsikring)." },
-    { emne: "Underforsikring", kat: "FAL § 40", tekst: "Hvis forsikringssummen er sat lavere end de faktiske værdier (fx indbo), nedsættes erstatningen forholdsmæssigt (pro-rata). Eks: Er man kun 50% forsikret, får man kun 50% af skaden dækket." },
-    { emne: "Fremrykket accept", kat: "FAL § 11", tekst: "Særlig regel for forsikringer. Selvom en skriftlig police ikke er udstedt, indtræder selskabets ansvar, når kunden har accepteret et tilbud, og selskabet normalt ville have antaget risikoen." },
-    { emne: "Mundtlige tilbud", kat: "AFTL § 3", tekst: "Aftaleloven bestemmer, at mundtlige tilbud skal accepteres straks, medmindre en anden frist aftales. Ellers falder de bort." },
-    { emne: "Uren Accept", kat: "AFTL § 6", tekst: "Hvis en kunde returnerer et tilbud, men ændrer i betingelserne eller prisen, betragtes det juridisk som et afslag på det oprindelige tilbud samt et nyt modtilbud." },
-    { emne: "Fuldmagt / Legitimation", kat: "AFTL § 10", tekst: "Bemyndigelse er hvad sælgeren internt må for sin chef. Legitimation er hvad kunden udefra med rimelighed forventer sælgeren må (fx give rabat). Handler sælger i strid med bemyndigelse, men inden for legitimation, er selskabet bundet over for en godtroende kunde." },
-    { emne: "God Skik (IDD)", kat: "Etik", tekst: "Rådgiveren har pligt til at handle ærligt, redeligt og professionelt i kundens bedste interesse. Dette inkluderer pligt til objektiv behovsafdækning før et salg." },
-    { emne: "Culpa-reglen", kat: "Erstatning", tekst: "Den almindelige erstatningsregel i Danmark. Man er kun erstatningsansvarlig for skader forvoldt ved uagtsomhed eller forsæt. Hændelige uheld udløser ikke ansvar." },
-    { emne: "Samtalestruktur", kat: "Salg", tekst: "Den professionelle fase-opdeling: 1. Kontakt/Indledning, 2. Behovsafdækning (HV-spørgsmål), 3. Løsning/Præsentation, 4. Accept/Indvendinger, 5. Afslutning." },
-    { emne: "Lønsomhed / Churn", kat: "Økonomi", tekst: "Churn er udtryk for kundeafgang. Krydssalg (flere produkter til samme kunde) øger loyaliteten drastisk, sænker churn og forbedrer dermed selskabets samlede lønsomhed." },
-    { emne: "Dobbeltforsikring", kat: "FAL", tekst: "Er samme interesse forsikret mod samme fare i flere selskaber, hæfter selskaberne solidarisk. Men kunden kan pga. berigelsesforbuddet samlet set aldrig få mere end sit reelle tab." }
+    { emne: "Berigelsesforbuddet", kat: "FAL § 39", tekst: "Man må ikke opnå en økonomisk vinding ved en skade. Erstatningen kan aldrig overstige det faktiske tab (Overforsikring)." },
+    { emne: "Underforsikring", kat: "FAL § 40", tekst: "Hvis forsikringssummen er lavere end de faktiske værdier, nedsættes erstatningen forholdsmæssigt (pro-rata)." },
+    { emne: "Fremrykket accept", kat: "FAL § 11", tekst: "Særlig regel for forsikringer: Selskabets ansvar indtræder, når kunden har accepteret et tilbud, hvis selskabet normalt ville have antaget risikoen." },
+    { emne: "Mundtlige tilbud", kat: "AFTL § 3", tekst: "Mundtlige tilbud skal accepteres straks, medmindre en anden frist aftales. Ellers falder de bort." },
+    { emne: "Uren Accept", kat: "AFTL § 6", tekst: "Ændrer kunden i vilkår eller pris ved accept, betragtes det som et afslag og et nyt modtilbud." },
+    { emne: "Fuldmagt / Legitimation", kat: "AFTL § 10", tekst: "Legitimation er hvad kunden udefra forventer sælgeren må (fx give rabat). Selskabet er bundet over for godtroende kunder." },
+    { emne: "God Skik (IDD)", kat: "Etik", tekst: "Pligt til at handle ærligt, redeligt og professionelt i kundens bedste interesse samt foretage objektiv behovsafdækning." },
+    { emne: "Culpa-reglen", kat: "Erstatning", tekst: "Grundregel: Man er kun erstatningsansvarlig for skader forvoldt ved uagtsomhed eller forsæt." },
+    { emne: "Samtalestruktur", kat: "Salg", tekst: "1. Indledning, 2. Behovsafdækning (HV-spørgsmål), 3. Løsning, 4. Accept/Indvendinger, 5. Afslutning." },
+    { emne: "Lønsomhed / Churn", kat: "Økonomi", tekst: "Churn er kundeafgang. Krydssalg af flere produkter til samme kunde øger loyaliteten og forbedrer lønsomheden." }
 ];
-
 function initOpslagsvaerk() { visOpslagsvaerkResultater(opslagsData); }
 function sogIOpslagsvaerk() {
     const term = document.getElementById("wiki-search").value.toLowerCase();
-    const filtered = opslagsData.filter(o => o.emne.toLowerCase().includes(term) || o.tekst.toLowerCase().includes(term) || o.kat.toLowerCase().includes(term));
-    visOpslagsvaerkResultater(filtered);
+    visOpslagsvaerkResultater(opslagsData.filter(o => o.emne.toLowerCase().includes(term) || o.tekst.toLowerCase().includes(term) || o.kat.toLowerCase().includes(term)));
 }
 function visOpslagsvaerkResultater(data) {
     const container = document.getElementById("wiki-results");
-    if(data.length === 0) { container.innerHTML = "<p style='color:var(--text-muted); font-size:13px;'>Ingen resultater fundet.</p>"; return; }
-    container.innerHTML = data.map(item => `
-        <div class="wiki-item">
-            <div class="wiki-title">${item.emne} <span class="tag">${item.kat}</span></div>
-            <div class="wiki-desc">${item.tekst}</div>
-        </div>
-    `).join("");
+    container.innerHTML = data.map(item => `<div class="wiki-item"><div class="wiki-title">${item.emne} <span class="tag">${item.kat}</span></div><div class="wiki-desc">${item.tekst}</div></div>`).join("");
 }
 
 // ==========================================
-// 2. KÆMPE OPGAVEPULJE (PENSUM KATEGORIER)
+// STOR OPGAVEPULJE (MÆNGDETRÆNING)
 // ==========================================
 const alleOpgaver = [
-  /* TEGNING & AFTL */
-  { id: "t_1", kategori: "Tegning", spørgsmål: "Kunden 'vil tænke over' et mundtligt tilbud. Senere på dagen ringer kunden og accepterer. Er aftalen bindende ifølge Aftaleloven?", options: ["Ja, tilbud gælder 24 timer.", "Nej, mundtlige tilbud falder bort, hvis de ikke accepteres straks (AFTL § 3).", "Ja, hvis samtalen er optaget.", "Ja, men selskabet kan annullere aftalen."], answer: 1, forklaring: "Jf. AFTL § 3 skal mundtlige tilbud accepteres straks uden aftalt frist. Ellers er kundens accept et nyt tilbud." },
-  { id: "t_2", kategori: "Tegning", spørgsmål: "Frank modtager et skriftligt tilbud. Han retter prisen nedad, underskriver og returnerer. Hvad er konsekvensen?", options: ["Aftalen er bindende med den nye pris.", "Ændringen betragtes som et afslag og et nyt tilbud fra kunden (AFTL § 6).", "Aftalen er bindende med det oprindelige beløb."], answer: 1, forklaring: "AFTL § 6 fastslår, at 'uren accept' fungerer som afslag og modtilbud." },
-  { id: "t_3", kategori: "Tegning", spørgsmål: "Kunden køber forsikring online til 'hurtigst mulig ikrafttræden'. Kunden får indbrud inden policen udstedes. Dækkes skaden?", options: ["Nej, policen skal være udstedt.", "Ja, pga. fremrykket accept (FAL § 11), da selskabet normalt ville have antaget risikoen.", "Kun hvis kunden har betalt første opkrævning."], answer: 1, forklaring: "For forsikringer gælder fremrykket accept (FAL § 11). Ansvaret indtræder ved accept-afsendelse." },
-  { id: "t_4", kategori: "Tegning", spørgsmål: "Du giver 10% rabat, selvom du internt ikke har bemyndigelse til det. Er selskabet bundet af aftalen over for kunden?", options: ["Nej, man kan ikke binde selskabet ud over sin bemyndigelse.", "Ja, du har handlet inden for din 'legitimation', og kunden er i god tro (AFTL § 10).", "Nej, aftalen er ugyldig pga. svig."], answer: 1, forklaring: "Selvom sælger bryder sin bemyndigelse, bindes selskabet hvis løftet ligger inden for det, kunden forventer (legitimation)." },
-  
-  /* SKADESITUATIONEN & FAL */
-  { id: "s_1", kategori: "Skadesituationen", spørgsmål: "Sanne har 1.000.000 kr. i indbosum, men kun reelle værdier for 750.000 kr. Hvad gælder ved en totalskade?", options: ["Hun får udbetalt 1.000.000 kr.", "Hun får maksimalt 750.000 kr. pga. berigelsesforbuddet.", "Aftalen er ugyldig pga. svig."], answer: 1, forklaring: "Overforsikring (FAL § 39). Berigelsesforbuddet sikrer, at man ikke må tjene på en skade." },
-  { id: "s_2", kategori: "Skadesituationen", spørgsmål: "Peter har stjålet for 100.000 kr. Hans sum er 800.000 kr., men han har reelt indbo for 1.000.000 kr. Hvad får han udbetalt?", options: ["100.000 kr.", "80.000 kr. pga. pro-rata reglen (underforsikring).", "800.000 kr."], answer: 1, forklaring: "Underforsikring (FAL § 40). Forholdstallet (800k/1M) er 80%, så han får 80% af sit tab." },
-  { id: "s_3", kategori: "Skadesituationen", spørgsmål: "En kunde får dækket en totalskade på sit hus. Hvordan gøres værdien typisk op?", options: ["Nyværdi (hvad det koster at bygge tilsvarende hus i dag).", "Dagsværdi (nyværdi fratrukket alder og slid).", "Handelsværdi (hvad huset kunne sælges for)."], answer: 0, forklaring: "Bygningsforsikringer dækker som udgangspunkt til nyværdi (genopførelsespris), forudsat huset var velvedligeholdt." },
-
-  /* ÆNDRINGER I LØBETID */
-  { id: "a_1", kategori: "Ændringer", spørgsmål: "Kunden ringer for at opsige sin husforsikring pga. utilfredshed. Hvornår kan den normalt opsiges gebyrfrit?", options: ["Når som helst med dags varsel.", "Til hovedforfald (med 1 måneds varsel) eller ved salg af huset.", "Efter 3 års binding."], answer: 1, forklaring: "Standardvilkår tillader gebyrfri opsigelse til hovedforfald eller når risikoen bortfalder (salg)." },
-  { id: "a_2", kategori: "Ændringer", spørgsmål: "Kunden bygger en stor garage på 60 kvm, men glemmer at oplyse det. Der sker en brand i garagen. Hvad er konsekvensen?", options: ["Fuld dækning, da garagen står på grunden.", "Det betragtes som en risikoændring, og dækningen kan reduceres pro-rata eller afvises.", "Dækkes af kommunen."], answer: 1, forklaring: "FAL regler om fareforøgelse/risikoændring betyder at manglende oplysning om væsentlige udvidelser rammer kunden ved skade." },
-
-  /* PRODUKTER */
-  { id: "p_1", kategori: "Produkter", spørgsmål: "Hvad dækker bilens lovpligtige ansvarsforsikring?", options: ["Bilens fører.", "Skader kunden forvolder på andres person, køretøj eller ting.", "Tyveri af bilen."], answer: 1, forklaring: "Ansvarsforsikringen dækker skader, kunden forvolder på ANDRE." },
-  { id: "p_2", kategori: "Produkter", spørgsmål: "Er en el-cykel til 25 km/t ansvarsforsikret over indboforsikringen?", options: ["Ja, som en almindelig cykel.", "Nej, den kræver lovpligtig knallertforsikring.", "Ja, men kun hvis kunden bærer hjelm."], answer: 0, forklaring: "El-cykler op til 25 km/t (pedal-assist) betragtes som almindelige cykler under indbo-ansvaret." },
-  { id: "p_3", kategori: "Produkter", spørgsmål: "Kunden har en hund, der bider en postbud. Dækker den almindelige indbo-ansvarsforsikring?", options: ["Ja, den dækker alle kæledyr.", "Nej, hunde kræver en særskilt lovpligtig hundeansvarsforsikring.", "Kun hvis hunden var i snor."], answer: 1, forklaring: "Hundeloven kræver særskilt lovpligtig hundeansvarsforsikring. Den almindelige privatansvar undtager hunde." },
-
-  /* LØNSOMHED, ETIK & SAMTALESTRUKTUR */
-  { id: "l_1", kategori: "Lønsomhed", spørgsmål: "Hvorfor er 'helkunder' (kunder med mange produkter) vigtige for selskabets lønsomhed?", options: ["De ringer aldrig ind.", "De har markant lavere 'churn' (opsigelsesfrekvens) og sikrer stabilitet i porteføljen.", "De har ingen fortrydelsesret."], answer: 1, forklaring: "Helkunder er mere loyale. Lavere churn betyder lavere omkostninger til nyanskaffelse af kunder." },
-  { id: "e_1", kategori: "Etik", spørgsmål: "Kunden ønsker at købe en dyr rejseforsikring. Du kan se, de allerede har en tilsvarende dækning på deres Mastercard. Hvad gør du?", options: ["Sælger den alligevel, det er nemme point.", "Gør kunden opmærksom på dobbeltdækningen ud fra reglerne om God Skik.", "Bederv kunden klippe sit Mastercard."], answer: 1, forklaring: "IDD og regler for God Skik forpligter rådgiveren til at handle i kundens interesse og undgå at sælge overflødige dækninger (undgå dobbeltdækning)." },
-  { id: "sam_1", kategori: "Samtalestruktur", spørgsmål: "I hvilken fase af samtalen bruger du primært de åbne HV-spørgsmål?", options: ["I indledningen.", "I Behovsafdækningen for at få kunden til at fortælle om deres situation og risici.", "Under præsentation af tilbuddet."], answer: 1, forklaring: "Behovsafdækningen kræver åbne spørgsmål (Hvad, Hvem, Hvordan) for at kortlægge kundens reelle behov." },
-  { id: "sam_2", kategori: "Samtalestruktur", spørgsmål: "Hvad er et typisk 'accept-spørgsmål' inden man lukker salget?", options: ["Hvor meget vil du betale?", "Lød det ikke spændende?", "Hvordan passer disse dækninger til de behov, vi lige talte om?"], answer: 2, forklaring: "Et accept-spørgsmål binder kundens behov sammen med den præsenterede løsning og tjekker om kunden er enig." }
+  { id: "t_1", kategori: "Tegning", spørgsmål: "Kunden 'vil tænke over' et mundtligt tilbud. Senere på dagen ringer kunden og accepterer. Er aftalen bindende?", options: ["Ja, tilbud gælder 24 timer.", "Nej, mundtlige tilbud falder bort, hvis de ikke accepteres straks (AFTL § 3).", "Ja, hvis samtalen optages."], answer: 1, forklaring: "Jf. AFTL § 3 skal mundtlige tilbud accepteres straks." },
+  { id: "t_2", kategori: "Tegning", spørgsmål: "Frank ændrer prisen i et skriftligt tilbud, underskriver og returnerer. Hvad er konsekvensen?", options: ["Aftalen gælder med den nye pris.", "Ændringen er en 'uren accept', der betragtes som afslag og nyt modtilbud (AFTL § 6).", "Aftalen bortfalder fuldstændigt uden modtilbud."], answer: 1, forklaring: "AFTL § 6: Uren accept er et afslag + nyt tilbud." },
+  { id: "t_3", kategori: "Tegning", spørgsmål: "Kunden køber forsikring online til hurtigst mulig ikrafttræden, men får indbrud før policen udstedes. Dækkes skaden?", options: ["Nej, policen skal foreligge fysisk.", "Ja, pga. fremrykket accept (FAL § 11), da selskabet normalt ville have antaget risikoen.", "Kun hvis første præmie er trukket via betalingskort."], answer: 1, forklaring: "FAL § 11 (fremrykket accept) sikrer dækning fra accept-afsendelse." },
+  { id: "t_4", kategori: "Tegning", spørgsmål: "Du giver 10% rabat i strid med interne regler. Er selskabet bundet over for kunden?", options: ["Nej, intern bemyndigelse kan aldrig overskrides.", "Ja, du handlede inden for din legitimation, og kunden var i god tro (AFTL § 10).", "Nej, aftalen kræver chefens underskrift."], answer: 1, forklaring: "Legitimation bindes over for godtroende kunder jf. AFTL § 10." },
+  { id: "s_1", kategori: "Skadesituationen", spørgsmål: "Sanne har 1 mio. i indbosum, men reelt kun værdier for 750.000 kr. Hvad gælder ved totalskade?", options: ["Hun får udbetalt 1.000.000 kr.", "Hun får max 750.000 kr. pga. berigelsesforbuddet (FAL § 39).", "Selskabet udbetaler ingenting pga. fejlagtig sum."], answer: 1, forklaring: "FAL § 39: Man må ikke opnå vinding (berigelsesforbud)." },
+  { id: "s_2", kategori: "Skadesituationen", spørgsmål: "Peter har stjålet for 100.000 kr. Summen er 800.000 kr., men værdierne er reelt 1 mio. kr. Hvad udbetales?", options: ["100.000 kr. fuldt ud.", "80.000 kr. pga. pro-rata reglen ved underforsikring (FAL § 40).", "800.000 kr."], answer: 1, forklaring: "FAL § 40: Underforsikring medfører proportional erstatning (80%)." },
+  { id: "s_3", kategori: "Skadesituationen", spørgsmål: "Hvordan gøres erstatning for bygningsskader på parcelhuse som udgangspunkt op?", options: ["Nyværdi (genopførelsespris for tilsvarende stand).", "Dagsværdi (fratrukket slid og ælde).", "Offentlig ejendomsvurdering."], answer: 0, forklaring: "Parcelhuse dækkes som udgangspunkt til nyværdi ved genopførelse." },
+  { id: "a_1", kategori: "Ændringer", spørgsmål: "Hvornår kan en privatforsikring normalt opsiges gebyrfrit af kunden?", options: ["Når som helst med 1 dags varsel.", "Til hovedforfald (med 1 md. varsel) eller ved risikoens ophør (fx hussalg).", "Kun i januar måned."], answer: 1, forklaring: "Opsigelse følger hovedforfald eller ophør af risiko." },
+  { id: "a_2", kategori: "Ændringer", spørgsmål: "Kunden udvider huset med en stor ny tagetage uden at melde det til selskabet. Hvad sker der ved en skade?", options: ["Ingenting, alt på adressen er dækket.", "Det er en risikoændring (fareforøgelse), som kan begrænse erstatningen.", "Politiet inddrager policen."], answer: 1, forklaring: "Væsentlige udvidelser er risikoændringer, der skal oplyses." },
+  { id: "p_1", kategori: "Produkter", spørgsmål: "Hvad dækker bilens lovpligtige ansvarsforsikring?", options: ["Skader på egen bil ved solouheld.", "Skader kunden forvolder på andres person og ting.", "Hærværk begået af ukendte personer."], answer: 1, forklaring: "Ansvarsforsikringen dækker skader på ANDRE." },
+  { id: "p_2", kategori: "Produkter", spørgsmål: "Er en el-cykel (op til 25 km/t) omfattet af indboforsikringens ansvarsdel?", options: ["Ja, som udgangspunkt som almindelig cykel.", "Nej, den kræver selskabets særskilte motorforsikring.", "Kun hvis den kører over 30 km/t."], answer: 0, forklaring: "El-cykler med pedalkraft op til 25 km/t sidestilles med almindelige cykler." },
+  { id: "p_3", kategori: "Produkter", spørgsmål: "Dækker en almindelig indbo-ansvarsforsikring skader forårsaget af kundens hund?", options: ["Ja, alle kæledyr er dækket.", "Nej, hunde kræver en særskilt lovpligtig hundeansvarsforsikring.", "Kun hvis hunden er under 1 år gammel."], answer: 1, forklaring: "Hundeloven kræver en særskilt hundeansvarsforsikring." },
+  { id: "l_1", kategori: "Lønsomhed", spørgsmål: "Hvorfor er 'helkunder' (flere produkter samlet) fordelagtige for selskabets lønsomhed?", options: ["De betaler dobbelt præmie.", "De har markant lavere churn (opsigelsesfrekvens) og bedre porteføljeøkonomi.", "De ringer aldrig til kundecentret."], answer: 1, forklaring: "Helkunder er mere loyale, hvilket sænker churn og øger lønsomheden." },
+  { id: "e_1", kategori: "Etik", spørgsmål: "Du ser, kunden allerede er dækket mod samme risiko via deres Mastercard. Hvad foreskriver 'God Skik'?", options: ["Sælg forsikringen uanset hvad, det tæller i salg.", "Gør kunden opmærksom på dobbeltdækningen i overensstemmelse med kundens bedste interesse.", "Bed kunden opsige sit dankort."], answer: 1, forklaring: "IDD 'God Skik' forpligter dig til at undgå unødvendige dobbeltdækninger." },
+  { id: "sam_1", kategori: "Samtalestruktur", spørgsmål: "Hvilken type spørgsmål bør du primært bruge under 'Behovsafdækningen'?", options: ["Lukke spørgsmål (Ja/Nej spørgsmål).", "Åbne HV-spørgsmål (Hvad, Hvordan, Hvorfor).", "Ledende spørgsmål der tvinger kunden til køb."], answer: 1, forklaring: "Åbne HV-spørgsmål giver kunden plads til at fortælle om reelle risici." }
 ];
 
 let aktiveOpgaver = []; let currentIndex = 0; let correctCount = 0;
@@ -326,7 +311,6 @@ function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
 function filterAndRestart() {
     const valg = document.getElementById("category-select").value;
     if (valg === "alle") aktiveOpgaver = shuffle([...alleOpgaver]);
-    else if (valg === "fejl") {/* logik fjernet for brevity i stub */}
     else aktiveOpgaver = shuffle(alleOpgaver.filter(q => q.kategori === valg));
     currentIndex = 0; correctCount = 0; loadQuestion();
 }
@@ -334,8 +318,10 @@ function filterAndRestart() {
 function loadQuestion() {
     if (!aktiveOpgaver.length) { document.getElementById("options-container").innerHTML = "<p>Ingen spørgsmål.</p>"; return; }
     const q = aktiveOpgaver[currentIndex];
-    document.getElementById("category-tag").innerText = q.kategori; document.getElementById("question-text").innerText = q.spørgsmål;
-    document.getElementById("explanation-box").style.display = "none"; document.getElementById("next-btn").style.display = "none";
+    document.getElementById("category-tag").innerText = q.kategori; 
+    document.getElementById("question-text").innerText = q.spørgsmål;
+    document.getElementById("explanation-box").style.display = "none"; 
+    document.getElementById("next-btn").style.display = "none";
     document.getElementById("progress-bar-fill").style.width = (currentIndex / aktiveOpgaver.length * 100) + "%";
 
     const container = document.getElementById("options-container"); container.innerHTML = "";
@@ -348,75 +334,75 @@ function loadQuestion() {
                 if (idx === i && i !== q.answer) b.classList.add("wrong");
             });
             document.getElementById("explanation-text").innerText = q.forklaring;
-            document.getElementById("explanation-box").style.display = "block"; document.getElementById("next-btn").style.display = "block";
+            document.getElementById("explanation-box").style.display = "block"; 
+            document.getElementById("next-btn").style.display = "block";
         };
         container.appendChild(btn);
     });
     document.getElementById("score-board").innerText = `Spørgsmål ${currentIndex + 1} af ${aktiveOpgaver.length}`;
+    document.getElementById("live-score").innerText = `Rigtige: ${correctCount}`;
 }
 function nextQuestion() {
     currentIndex++;
     if (currentIndex < aktiveOpgaver.length) loadQuestion();
     else {
         document.getElementById("progress-bar-fill").style.width = "100%";
-        document.getElementById("options-container").innerHTML = `<div style="text-align:center;"><h3>Afsluttet!</h3><p>Du fik ${correctCount} af ${aktiveOpgaver.length} rigtige.</p><button class="restart-btn" onclick="filterAndRestart()">Prøv Igen</button></div>`;
+        document.getElementById("options-container").innerHTML = `<div style="text-align:center;"><h3>Træning afsluttet!</h3><p>Du fik ${correctCount} af ${aktiveOpgaver.length} rigtige.</p><button class="restart-btn" onclick="filterAndRestart()">Prøv Igen 🔄</button></div>`;
         document.getElementById("next-btn").style.display = "none";
+        document.getElementById("explanation-box").style.display = "none";
     }
 }
 
 // ==========================================
-// 3. ROLLESPIL - KÆMPE KUNDEFLOW (NY!)
+// ROLLESPIL / KUNDEFLOW MOTOR
 // ==========================================
 const cases = {
-    case3: { // NYT SAMLET KUNDEFLOW MED FORGRENINGER
+    case3: {
         titel: "Samlet Kundeflow (Ny Helkunde)",
         steps: {
-            start: { sensor: "Kunde: Hej, jeg ringer fordi min kæreste og jeg lige har købt et nyt rækkehus, og vi tænker, vi nok skal have nogle forsikringer til det.", options: [
-                { text: "Tillykke med huset! Det vil jeg meget gerne hjælpe med. En husforsikring hos os koster typisk 4.500 kr. Skal jeg oprette den med det samme?", rigtig: false, feedback: "Du springer behovsafdækningen over! Det er i strid med god rådgivningsskik.", next: "pris_fejl" },
-                { text: "Kæmpe tillykke med huset! Det vil jeg meget gerne hjælpe jer med. For at sikre, I får præcis den dækning I har brug for, må jeg så stille et par spørgsmål om huset og jeres situation?", rigtig: true, feedback: "Fremragende start! Du kvitterer for anledningen og starter behovsafdækningen professionelt.", next: "behov_succes" }
+            start: { sensor: "Kunde: Hej, min kæreste og jeg har købt et nyt rækkehus, og vi skal vist have nogle forsikringer til det.", options: [
+                { text: "Tillykke! En husforsikring koster 4.500 kr. Skal jeg oprette den med det samme?", rigtig: false, feedback: "Fejl: Du springer behovsafdækningen over!", next: "pris_fejl" },
+                { text: "Kæmpe tillykke med huset! Må jeg stille et par spørgsmål om huset og jeres situation, så vi finder den rette dækning?", rigtig: true, feedback: "Godt! Du starter med behovsafdækning.", next: "behov_succes" }
             ]},
-            // Spor A (Forkert - Forhastet salg)
-            pris_fejl: { sensor: "Kunde: Øh... 4.500 kr? Er det ikke ret dyrt? Jeg ved jo slet ikke, hvad der er med i den pris?", options: [
-                { text: "Det dækker brand, storm og vand. Vi kan godt gøre det billigere, hvis du fravælger rørskade?", rigtig: false, feedback: "Du begynder at forhandle pris og forringe dækningen før du overhovedet kender huset.", next: "slut_fejl" },
-                { text: "Det kan jeg godt forstå du spørger om. Beklager, jeg var lidt for hurtig. Lad os lige tage et skridt tilbage og tale om jeres konkrete behov først.", rigtig: true, feedback: "Godt reddet. Du vender tilbage til samtalestrukturen.", next: "behov_succes" }
+            pris_fejl: { sensor: "Kunde: Øh... 4.500 kr? Jeg ved jo slet ikke, hvad der er med i den pris?", options: [
+                { text: "Lad os tage et skridt tilbage og tale om jeres behov først.", rigtig: true, feedback: "Godt reddet tilbage til strukturen.", next: "behov_succes" },
+                { text: "Vi kan bare fjerne rørskade, så bliver det billigere.", rigtig: false, feedback: "Fejl: Du prisfuserer før behov er kendt.", next: "slut_fejl" }
             ]},
-            // Spor B (Rigtigt - Behovsafdækning)
-            behov_succes: { sensor: "Kunde: Ja, selvfølgelig. Hvad har du brug for at vide?", options: [
-                { text: "Hvor stort er huset, og er der nogle særlige dyre installationer eller skjulte rør, vi skal være opmærksomme på?", rigtig: true, feedback: "Åbent, relevant behovsafdækkende spørgsmål (Husforsikring).", next: "indbo_krydssalg" },
-                { text: "Har I mange dyre smykker?", rigtig: false, feedback: "Irrelevant for husforsikringen. Smykker hører under Indbo.", next: "indbo_krydssalg" }
+            behov_succes: { sensor: "Kunde: Ja, for os på. Hvad vil du vide?", options: [
+                { text: "Hvor stort er huset, og er der nogle særlige installationer eller skjulte rør?", rigtig: true, feedback: "Relevant for husforsikringen.", next: "indbo_krydssalg" }
             ]},
-            indbo_krydssalg: { sensor: "Kunde: Huset er fra 1980, så der er nok nogle gamle skjulte rør. Vi har faktisk heller ikke fået flyttet vores indboforsikring endnu.", options: [
-                { text: "Jeg noterer skjulte rør. Siden I flytter sammen nu, skal vi så ikke også få kigget på jeres indboforsikring, så I er dækket for både ansvar, cykler og tyveri ét sted?", rigtig: true, feedback: "Flot krydssalg (Lønsomhed) og god rådgivning. At samle alt gør dem til 'Helkunder'.", next: "tilbud_fase" }
+            indbo_krydssalg: { sensor: "Kunde: Huset er fra 1980 med gamle rør. Vi mangler i øvrigt også indboforsikring.", options: [
+                { text: "Skal vi ikke samle det, så I får helkunderabat og dækning for ansvar, cykler og tyveri ét sted?", rigtig: true, feedback: "Flot krydssalg og lønsomhedstænkning!", next: "tilbud_fase" }
             ]},
-            tilbud_fase: { sensor: "Kunde: Det lyder fornuftigt. Men min kæreste var bange for, at hvis vi køber indbo hos jer for en sum på 800.000 kr, og vi reelt kun har for 500.000 kr., hvad sker der så hvis det brænder?", options: [
-                { text: "Så får I 800.000 kr, fordi I betaler for summen.", rigtig: false, feedback: "Du glemmer FAL § 39 og Berigelsesforbuddet!", next: "slut_fejl" },
-                { text: "På grund af berigelsesforbuddet vil I maksimalt få dækket jeres reelle tab (500.000 kr.). Vi skal derfor sikre, summen sættes præcist, så I ikke betaler for meget i præmie.", rigtig: true, feedback: "Præcis og ærlig rådgivning der skaber tillid og overholder IDD.", next: "accept_fase" }
+            tilbud_fase: { sensor: "Kunde: Hvad nu hvis vi vælger 800.000 kr i indbosum, men kun har værdier for 500.000 kr? Får vi så 800k ved brand?", options: [
+                { text: "Nej, pga. berigelsesforbuddet (FAL § 39) får I max det reelle tab (500.000 kr.).", rigtig: true, feedback: "Knivskarpt! Du har styr på FAL § 39.", next: "accept_fase" },
+                { text: "Ja, man får altid udbetalt den sum man betaler for.", rigtig: false, feedback: "Fejl: Overforsikring dækker kun reelt tab.", next: "slut_fejl" }
             ]},
-            accept_fase: { sensor: "Kunde: Ah, det var rart at få på plads. Så vil vi gerne sige ja tak til begge forsikringer fra 1. i næste måned.", options: [
-                { text: "Perfekt! Aftalen er hermed bindende, og forsikringerne træder i kraft.", rigtig: true, feedback: "Flot afslutning! Aftalen er mundtligt bindende (AFTL § 3).", next: "slut_succes" }
+            accept_fase: { sensor: "Kunde: Det giver mening. Vi vil gerne sige ja tak til begge del fra 1. næste måned.", options: [
+                { text: "Perfekt! Aftalen er mundtligt bindende herfra (AFTL § 3). Jeg sender police.", rigtig: true, feedback: "Perfekt afslutning på samtalen!", next: "slut_succes" }
             ]},
-            slut_succes: { sensor: "Sensor: FREMRAGENDE SAMTALE! Du overholdt samtalestrukturen, afdækkede behov, lavede krydssalg og rådgav korrekt om FAL. Du har sikret en god, lønsom helkunde.", options: [] },
-            slut_fejl: { sensor: "Sensor: Samtalen kørte af sporet. Husk din samtalestruktur (Behovsafdækning FØR pris) og husk at have styr på juraen (FAL) inden du rådgiver.", options: [] }
+            slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du overholdt samtalestrukturen, lavede krydssalg og ramte juraen rent.", options: [] },
+            slut_fejl: { sensor: "Sensor: Samtalen faldt fra hinanden. Husk behovsafdækning og FAL-regler.", options: [] }
         }
     },
-    case1: { // Gammel Case (bevaret)
+    case1: {
         titel: "Kunde: Henrik (Aftaleloven)",
         steps: {
-            start: { sensor: "Kunde (Henrik): Hej! Jeg sagde tidligere, jeg ville tænke over det mundtlige tilbud. Nu takker jeg ja!", options: [
-                { text: "Da du ikke takkede ja straks, er tilbuddet faldet bort ifølge Aftaleloven. Men lad mig kigge på en ny pris til dig.", rigtig: true, feedback: "Korrekt rådgivning (AFTL § 3).", next: "slut" },
-                { text: "Fantastisk! Aftalen er lukket til den pris.", rigtig: false, feedback: "AFTL § 3: Mundtlige tilbud der ikke accepteres straks, falder bort.", next: "slut" }
+            start: { sensor: "Kunde: Jeg vil gerne takke ja til det mundtlige tilbud fra tidligere i dag.", options: [
+                { text: "Da du ikke takkede ja straks, er tilbuddet faldet bort (AFTL § 3). Lad os se på en ny pris.", rigtig: true, feedback: "Korrekt!", next: "slut" },
+                { text: "Aftalt, jeg opretter det til den gamle pris.", rigtig: false, feedback: "Fejl: Mundtlige tilbud kræver straks-accept.", next: "slut" }
             ]},
-            slut: { sensor: "Sensor: Samtale afsluttet.", options: [] }
+            slut: { sensor: "Sensor: Øvelse slut.", options: [] }
         }
     },
-    case2: { // Gammel Case (bevaret)
+    case2: {
         titel: "Kunde: Sanne (Overforsikring)",
         steps: {
-            start: { sensor: "Kunde (Sanne): Min sum er 1 million, men jeg har kun værdier for 750.000. Får jeg 1 mio. ved brand?", options: [
-                { text: "Nej, du får max 750.000 kr. pga. berigelsesforbuddet.", rigtig: true, feedback: "Korrekt anvendelse af FAL § 39.", next: "slut" },
-                { text: "Ja, det har du betalt for.", rigtig: false, feedback: "Forkert! Strider mod berigelsesforbuddet.", next: "slut" }
+            start: { sensor: "Kunde: Min indbosum er 1 mio, men værdier er 750.000. Får jeg 1 mio ved brand?", options: [
+                { text: "Nej, berigelsesforbuddet (FAL § 39) sikrer, du max får reelt tab (750k).", rigtig: true, feedback: "Korrekt!", next: "slut" },
+                { text: "Ja da, du betaler jo for det.", rigtig: false, feedback: "Fejl: Man kan ikke tjene på skader.", next: "slut" }
             ]},
-            slut: { sensor: "Sensor: Samtale afsluttet.", options: [] }
+            slut: { sensor: "Sensor: Øvelse slut.", options: [] }
         }
     }
 };
@@ -431,16 +417,20 @@ function startNyCase() {
 }
 function renderDialogStep() {
     const s = cases[nuvCaseId].steps[nuvStepId];
-    document.getElementById("dialog-history").innerHTML += `<div class="bubble bubble-sensor">${s.sensor}</div>`;
+    const hist = document.getElementById("dialog-history");
+    hist.innerHTML += `<div class="bubble bubble-sensor">${s.sensor}</div>`;
+    hist.scrollTop = hist.scrollHeight;
+    
     const optCont = document.getElementById("dialog-options");
+    optCont.innerHTML = "";
     if (s.options.length === 0) { document.getElementById("dialog-restart-btn").style.display = "block"; return; }
     s.options.forEach(o => {
         const b = document.createElement("button"); b.className = "btn"; b.innerText = o.text;
         b.onclick = () => {
-            document.getElementById("dialog-history").innerHTML += `<div class="bubble bubble-user">${o.text}</div>`;
+            hist.innerHTML += `<div class="bubble bubble-user">${o.text}</div>`;
+            hist.scrollTop = hist.scrollHeight;
             const fb = document.getElementById("dialog-feedback"); fb.innerText = o.feedback; fb.style.color = o.rigtig ? "var(--success)" : "var(--danger)";
             optCont.innerHTML = ""; nuvStepId = o.next; document.getElementById("dialog-next-btn").style.display = "block";
-            document.getElementById("dialog-history").scrollTop = document.getElementById("dialog-history").scrollHeight;
         };
         optCont.appendChild(b);
     });
