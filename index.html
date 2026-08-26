@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IDD 3.58 & FOAK Træning</title>
+    <title>IDD 3.58 - Salg og Rådgivning</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#131f24">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -44,7 +44,6 @@
             padding: 12px;
         }
 
-        /* Top bar med tilbage-knap og titel når man er inde i et spil */
         .top-bar {
             display: flex;
             align-items: center;
@@ -52,6 +51,7 @@
             margin-bottom: 12px;
             flex-shrink: 0;
         }
+        
         .back-btn {
             background: #233642;
             border: 2px solid var(--border-dark);
@@ -65,7 +65,6 @@
         }
         .back-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
-        /* Hovedkort */
         .card { 
             background: var(--card-dark); 
             border-radius: 20px; 
@@ -115,7 +114,6 @@
             font-weight: 700;
         }
 
-        /* Svarknapper */
         .options-container {
             display: flex;
             flex-direction: column;
@@ -157,7 +155,6 @@
             color: #fee2e2 !important; 
         }
 
-        /* Forklaring med indbygget scroll så den aldrig spreder sig ud over skærmen */
         .explanation { 
             margin-top: 8px; 
             padding: 10px; 
@@ -230,36 +227,6 @@
             margin-top: 8px;
         }
 
-        .timer-badge { 
-            background: var(--danger); 
-            color: white; 
-            padding: 4px 8px; 
-            border-radius: 10px; 
-            font-weight: 800; 
-            font-size: 11px; 
-        }
-        
-        .leaderboard-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-        .leaderboard-table th, .leaderboard-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-dark); font-size: 13px; }
-        .leaderboard-table th { background: #162630; color: var(--text-main); font-weight: 800; }
-        
-        .login-btn { 
-            background: var(--primary); 
-            border-bottom: 4px solid var(--primary-dark);
-            color: white; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            padding: 10px; 
-            width: 100%; 
-            font-weight: 800; 
-            font-size: 14px; 
-            margin-top: 6px;
-        }
-
-        .duel-box { border: 2px dashed var(--border-dark); padding: 12px; border-radius: 14px; margin-bottom: 8px; text-align: center; background: #17242c; }
-        .teams-btn { background: #5b5fc7; border-bottom: 4px solid #434699; color: white; border-radius: 12px; cursor: pointer; padding: 10px; width: 100%; font-weight: 800; font-size: 13px; margin-top: 6px; }
-
-        /* Forside Menu Knapper (Duolingo stil) */
         .menu-grid {
             display: flex;
             flex-direction: column;
@@ -267,6 +234,7 @@
             justify-content: center;
             flex: 1;
         }
+        
         .menu-btn {
             background: var(--card-dark);
             border: 2px solid var(--border-dark);
@@ -286,51 +254,81 @@
         .menu-btn:active { transform: translateY(2px); border-bottom-width: 3px; }
         .menu-btn span { font-size: 24px; }
 
-        .wiki-scroll { overflow-y: auto; flex: 1; padding-right: 4px; }
-        .wiki-item { border-bottom: 1px solid var(--border-dark); padding: 10px 0; }
-        .wiki-title { font-weight: 800; color: var(--primary); font-size: 14px; margin-bottom: 2px; }
-        .wiki-cat { font-size: 10px; background: #253b47; color: var(--primary); padding: 2px 6px; border-radius: 10px; margin-left: 6px; font-weight: 800; }
-        .wiki-desc { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
+        /* Chat (Rollespil) Styles */
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 4px;
+            margin-bottom: 10px;
+        }
+        .bubble {
+            padding: 12px 14px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.4;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        .bubble-sensor {
+            background: #233642;
+            border: 1px solid var(--border-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            color: #fff;
+        }
+        .bubble-user {
+            background: var(--primary-dark);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            color: #fff;
+        }
+        .dialog-feedback {
+            font-size: 12px;
+            color: var(--success);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         
-        <!-- FORSIDE / MENU SKÆRM -->
+        <!-- FORSIDE / MENU -->
         <div id="home-section" style="display: flex; flex-direction: column; height: 100%;">
             <div class="card" style="justify-content: space-between; text-align: center; padding: 24px;">
                 <div>
                     <span style="font-size: 36px;">🛡️</span>
-                    <h2 style="margin: 10px 0 5px 0; font-size: 22px;">IDD 3.58 & FOAK</h2>
-                    <p style="color: var(--text-muted); font-size: 13px; margin: 0;">Vælg en aktivitet og start træningen</p>
+                    <h2 style="margin: 10px 0 5px 0; font-size: 22px;">IDD 3.58 Rådgivning</h2>
+                    <p style="color: var(--text-muted); font-size: 13px; margin: 0;">Træn lovgivning og kundedialog</p>
                 </div>
 
                 <div class="menu-grid">
                     <button class="menu-btn" onclick="skiftFane('quiz')" style="border-color: #58cc02; background: #1b4d2e;">
-                        <span>🎯</span> <div><div>Træning</div><div style="font-size: 11px; color: #a7f3d0; font-weight: normal;">Træn emner & egne fejl</div></div>
+                        <span>🎯</span> <div><div>Opgavetræning</div><div style="font-size: 11px; color: #a7f3d0; font-weight: normal;">FAL, Aftaleloven, etc.</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('exam')" style="border-color: #1cb0f6; background: #153342;">
-                        <span>⏱️</span> <div><div>Eksamenstest</div><div style="font-size: 11px; color: #bae6fd; font-weight: normal;">Officiel 60-min test (40 spørgsmål)</div></div>
+                        <span>⏱️</span> <div><div>Eksamenstest</div><div style="font-size: 11px; color: #bae6fd; font-weight: normal;">Simuleret prøve</div></div>
                     </button>
-                    <button class="menu-btn" onclick="skiftFane('duel')" style="border-color: #ce82ff; background: #3b1f4d;">
-                        <span>⚔️</span> <div><div>Duel</div><div style="font-size: 11px; color: #e9d5ff; font-weight: normal;">Udfordr en kollega</div></div>
+                    <button class="menu-btn" onclick="skiftFane('dialog')" style="border-color: #ce82ff; background: #3b1f4d;">
+                        <span>🗣️</span> <div><div>Rollespil (Mundtlig)</div><div style="font-size: 11px; color: #e9d5ff; font-weight: normal;">Træn kundesamtaler & jura</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('wiki')" style="border-color: #ff9600; background: #452b11;">
-                        <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 11px; color: #fde68a; font-weight: normal;">Søg i juridiske begreber</div></div>
-                    </button>
-                    <button class="menu-btn" onclick="skiftFane('leaderboard')" style="border-color: #ffc800; background: #453c11;">
-                        <span>🏆</span> <div><div>Top 10</div><div style="font-size: 11px; color: #fef08a; font-weight: normal;">Se selskabets rangliste</div></div>
+                        <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 11px; color: #fde68a; font-weight: normal;">Søg i begreber</div></div>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- SPIL / AKTIVITETS CONTAINER (Med tilbage-knap øverst) -->
+        <!-- SPIL CONTAINER -->
         <div id="game-container" style="display: none; flex-direction: column; height: 100%;">
             <div class="top-bar">
-                <button class="back-btn" onclick="gaaTilForside()">🏠 Tilbage til menu</button>
-                <span id="active-title" style="font-weight: 800; font-size: 14px; color: var(--text-muted);">TRÆNING</span>
+                <button class="back-btn" onclick="gaaTilForside()">🏠 Tilbage</button>
+                <span id="active-title" style="font-weight: 800; font-size: 14px; color: var(--text-muted);">...</span>
             </div>
 
             <!-- SEKTION 1: TRÆNING -->
@@ -340,14 +338,8 @@
                     <select id="category-select" onchange="filterAndRestart()">
                         <option value="alle">Alle emner</option>
                         <option value="fejl" id="fejl-option">❌ Mine fejl (0)</option>
-                        <option value="Ulykkesforsikring">Ulykkesforsikring</option>
-                        <option value="Auto">Auto</option>
-                        <option value="Hus">Hus</option>
-                        <option value="Indbo">Indbo</option>
-                        <option value="Ansvar & Rejse">Ansvar & Rejse</option>
-                        <option value="Generelle juridiske forhold">Generelle juridiske forhold</option>
-                        <option value="Forsikringsaftaleloven">Forsikringsaftaleloven</option>
-                        <option value="Erstatningsret">Erstatningsret</option>
+                        <option value="FAL">Forsikringsaftaleloven (FAL)</option>
+                        <option value="AFTL">Aftaleloven (AFTL)</option>
                     </select>
                 </div>
 
@@ -367,7 +359,7 @@
                     <div id="options-container" class="options-container"></div>
 
                     <div id="explanation-box" class="explanation">
-                        <strong>💡 Faglig begrundelse:</strong>
+                        <strong>💡 Rådgivningsfokus:</strong>
                         <p id="explanation-text" style="margin:2px 0 0 0;"></p>
                     </div>
 
@@ -378,20 +370,20 @@
             <!-- SEKTION 2: EKSAMEN -->
             <div id="exam-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card" id="exam-start-card" style="justify-content: center; text-align: center;">
-                    <h3 style="font-size: 18px; margin-top:0;">🎓 Officiel IDD 3.58 Eksamen</h3>
+                    <h3 style="font-size: 18px; margin-top:0;">🎓 3.58 Eksamen</h3>
                     <p style="font-size: 13px; color: var(--text-muted); line-height: 1.4;">
-                        40 spørgsmål • 60 minutters tidsgrænse • Krav: Min. 80% (32/40).
+                        10 spørgsmål i Aftaleloven og FAL. Tidsgrænse: 20 minutter.
                     </p>
-                    <button class="login-btn" style="padding: 12px; margin-top: 15px;" onclick="startEksamen()">Start Eksamen 🚀</button>
+                    <button class="login-btn" style="padding: 12px; margin-top: 15px;" onclick="startEksamen()">Start 🚀</button>
                 </div>
 
                 <div class="card" id="exam-quiz-card" style="display: none;">
                     <div class="score">
-                        <span id="exam-progress">Spørgsmål 1 af 40</span>
-                        <span id="exam-timer" class="timer-badge">⏱️ 60:00</span>
+                        <span id="exam-progress">Spørgsmål 1</span>
+                        <span id="exam-timer" class="timer-badge" style="background:var(--danger);">⏱️ 20:00</span>
                     </div>
                     <span id="exam-category-tag" class="tag">Kategori</span>
-                    <h3 id="exam-question-text" style="margin: 0 0 8px 0; font-size: 15px; line-height: 1.3;">Henter spørgsmål...</h3>
+                    <h3 id="exam-question-text" style="margin: 0 0 8px 0; font-size: 15px;">Henter...</h3>
                     
                     <div id="exam-options-container" class="options-container"></div>
 
@@ -399,31 +391,29 @@
                 </div>
             </div>
 
-            <!-- SEKTION 3: DUEL -->
-            <div id="duel-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
-                <div class="card" id="duel-menu-card" style="overflow-y: auto;">
-                    <h3 style="font-size: 16px; margin-top:0;">⚔️ Duellér mod en kollega</h3>
-                    <div class="duel-box" style="margin-top: 10px;">
-                        <h4 style="margin:0 0 4px 0; font-size:13px;">Opret ny udfordring</h4>
-                        <input type="text" id="duel-spiller1-navn" placeholder="Indtast dit navn">
-                        <button class="login-btn" onclick="opretDuel()">Opret Duel 🚀</button>
-                    </div>
-                    <div class="duel-box" style="border-color: var(--primary); background: #15222b;">
-                        <h4 style="margin:0 0 4px 0; font-size:13px; color: var(--primary);">Deltag i duel</h4>
-                        <input type="text" id="duel-spiller2-navn" placeholder="Indtast dit navn" style="margin-bottom:4px;">
-                        <input type="text" id="duel-kode-input" placeholder="Indtast duel-kode">
-                        <button class="login-btn" style="background-color: var(--success);" onclick="deltagIDuel()">Tag Udfordringen ⚔️</button>
-                    </div>
+            <!-- SEKTION 3: SAMTALE / ROLLESPIL -->
+            <div id="dialog-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
+                <div class="filter-box">
+                    <label style="font-weight: 800; font-size: 12px; color: var(--text-muted);">VÆLG CASE:</label>
+                    <select id="case-select" onchange="startNyCase()">
+                        <option value="case1">Kunde: Henrik (Mundtligt tilbud)</option>
+                        <option value="case2">Kunde: Sanne (Overforsikring)</option>
+                    </select>
                 </div>
 
-                <div class="card" id="duel-quiz-card" style="display: none;">
-                    <div class="score">
-                        <span id="duel-progress">Spørgsmål 1 af 5</span>
-                        <span id="duel-status-tag" class="tag">Duel</span>
+                <div class="card" style="flex: 1; padding: 10px; display: flex; flex-direction: column;">
+                    
+                    <div id="dialog-history" class="chat-container">
+                        <!-- Chat bobler dukker op her -->
                     </div>
-                    <h3 id="duel-question-text" style="margin: 0 0 8px 0; font-size: 15px;">Henter spørgsmål...</h3>
-                    <div id="duel-options-container" class="options-container"></div>
-                    <button id="duel-next-btn" class="next-btn" style="display: block;" onclick="naesteDuelSporgsmal()">Næste →</button>
+                    
+                    <div id="dialog-feedback" class="dialog-feedback"></div>
+
+                    <div id="dialog-options" class="options-container" style="flex: none; margin-top:0;">
+                        <!-- Valgmuligheder dukker op her -->
+                    </div>
+                    <button id="dialog-next-btn" class="next-btn" style="display: none;" onclick="naesteDialogSkridt()">Fortsæt Samtalen →</button>
+                    <button id="dialog-restart-btn" class="restart-btn" style="display: none;" onclick="startNyCase()">Prøv Case Igen 🔄</button>
                 </div>
             </div>
 
@@ -431,48 +421,21 @@
             <div id="wiki-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card">
                     <h3 style="font-size: 16px; margin-top:0;">📖 Opslagsværk</h3>
-                    <input type="text" id="wiki-search" placeholder="🔍 Søg på f.eks. Culpa, Svig..." onkeyup="sogIOpslagsvaerk()">
-                    <div class="wiki-scroll" id="wiki-results" style="margin-top: 8px;"></div>
-                </div>
-            </div>
-
-            <!-- SEKTION 5: RANGLISTE -->
-            <div id="leaderboard-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
-                <div class="card" style="overflow-y: auto;">
-                    <h3 style="font-size: 16px; margin-top:0;">🏆 Selskabets Top 10</h3>
-                    <table class="leaderboard-table">
-                        <thead>
-                            <tr><th>#</th><th>Navn</th><th>Score</th><th>%</th></tr>
-                        </thead>
-                        <tbody id="leaderboard-body">
-                            <tr><td colspan="4">Henter rangliste...</td></tr>
-                        </tbody>
-                    </table>
+                    <input type="text" id="wiki-search" placeholder="🔍 Søg på f.eks. FAL § 39, AFTL..." onkeyup="sogIOpslagsvaerk()">
+                    <div class="options-container" id="wiki-results" style="margin-top: 8px;"></div>
                 </div>
             </div>
         </div>
-
     </div>
 
 <script>
-const SUPABASE_URL = "https://mnrpfttbfmmloqmdywqx.supabase.co";
-const SUPABASE_KEY = "sb_publishable_xtd5eQJYrSncTdPS6Dfzmg_jvDR6MiX";
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 function skiftFane(fane) {
     document.getElementById("home-section").style.display = "none";
     document.getElementById("game-container").style.display = "flex";
     
-    const views = document.querySelectorAll(".game-view");
-    views.forEach(v => v.style.display = "none");
+    document.querySelectorAll(".game-view").forEach(v => v.style.display = "none");
 
-    const titler = {
-        'quiz': '🎯 TRÆNING',
-        'exam': '⏱️ EKSAMEN',
-        'duel': '⚔️ DUEL',
-        'wiki': '📖 OPSLAGSVÆRK',
-        'leaderboard': '🏆 TOP 10'
-    };
+    const titler = { 'quiz': '🎯 OPGAVETRÆNING', 'exam': '⏱️ EKSAMEN', 'dialog': '🗣️ ROLLESPIL', 'wiki': '📖 OPSLAG' };
     document.getElementById("active-title").innerText = titler[fane] || '';
 
     if (fane === 'quiz') {
@@ -482,17 +445,12 @@ function skiftFane(fane) {
         document.getElementById("exam-section").style.display = "flex";
         document.getElementById("exam-start-card").style.display = "flex";
         document.getElementById("exam-quiz-card").style.display = "none";
-        nulstilEksamensTimer();
-    } else if (fane === 'duel') {
-        document.getElementById("duel-section").style.display = "flex";
-        document.getElementById("duel-menu-card").style.display = "flex";
-        document.getElementById("duel-quiz-card").style.display = "none";
+    } else if (fane === 'dialog') {
+        document.getElementById("dialog-section").style.display = "flex";
+        startNyCase();
     } else if (fane === 'wiki') {
         document.getElementById("wiki-section").style.display = "flex";
         visOpslagsvaerk();
-    } else if (fane === 'leaderboard') {
-        document.getElementById("leaderboard-section").style.display = "flex";
-        hentRangliste();
     }
 }
 
@@ -502,389 +460,359 @@ function gaaTilForside() {
     document.getElementById("home-section").style.display = "flex";
 }
 
-const opslagsData = [
-  { emne: "Culpa-reglen", kat: "Erstatningsret", tekst: "Grundreglen for erstatningsansvar i dansk ret. Kræver at skadevolder har udvist skyld i form af enten uagtsomhed eller forsæt." },
-  { emne: "Objektivt ansvar", kat: "Erstatningsret", tekst: "Erstatningsansvar uanset skyld. Gælder f.eks. for hundeejere og motorkøretøjer." },
-  { emne: "FAL § 4 (Svig)", kat: "Forsikringsaftaleloven", tekst: "Hvis forsikringstageren svigagtigt afgiver urigtige oplysninger, er selskabet helt fri for dækningspligt." },
-  { emne: "FAL § 6 (Uagtsomhed)", kat: "Forsikringsaftaleloven", tekst: "Ved uagtsomme udtalelser reguleres erstatningen ud fra pro-rata/proportionalitetsprincippet." },
-  { emne: "FAL § 12 (Ikrafttræden)", kat: "Forsikringsaftaleloven", tekst: "En forsikringsaftale træder i kraft dagen efter, at tilbuddet eller antagelsesfristen er afsendt." },
-  { emne: "Ulykkesdefinition", kat: "Ulykkesforsikring", tekst: "Defineres som en 'pludselig hændelse, der forårsager skade på legemet'." },
-  { emne: "Méngrad", kat: "Ulykkesforsikring", tekst: "Den medicinske vurdering af det varige helbredsmæssige tab efter en skade (fra min. 5%)." },
-  { emne: "Regres", kat: "Auto / Ansvar", tekst: "Når selskabet udbetaler erstatning og kræver pengene tilbage fra den ansvarlige pga. f.eks. beruselse." }
-];
-
-function visOpslagsvaerk(filtreretData = opslagsData) {
-    const container = document.getElementById("wiki-results");
-    if (!container) return;
-    if (filtreretData.length === 0) {
-        container.innerHTML = "<p style='color:var(--text-muted); font-size:12px;'>Ingen begreber matchede din søgning.</p>";
-        return;
-    }
-    let html = "";
-    filtreretData.forEach(item => {
-        html += `
-            <div class="wiki-item">
-                <div>
-                    <span class="wiki-title">${item.emne}</span>
-                    <span class="wiki-cat">${item.kat}</span>
-                </div>
-                <div class="wiki-desc">${item.tekst}</div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-function sogIOpslagsvaerk() {
-    const søgetekst = document.getElementById("wiki-search").value.toLowerCase();
-    const resultater = opslagsData.filter(item => 
-        item.emne.toLowerCase().includes(søgetekst) || 
-        item.kat.toLowerCase().includes(søgetekst) || 
-        item.tekst.toLowerCase().includes(søgetekst)
-    );
-    visOpslagsvaerk(resultater);
-}
-
+// -------------------------------------------------------------
+// OPGAVEDATA (Baseret direkte på dine officielle filer)
+// -------------------------------------------------------------
 const alleOpgaver = [
+  // Fra Fil 1: Over/Underforsikring (FAL)
   {
-    id: "u01", kategori: "Ulykkesforsikring",
-    spørgsmål: "Jasmin skal på college i USA i 11 måneder. Vil ulykkesforsikringen dække hende, mens hun er væk?",
+    id: "f1_1", kategori: "FAL",
+    spørgsmål: "Sanne har tegnet en indboforsikring på 1.000.000 kr., men har reelt kun værdier for 750.000 kr. Hvilken betydning har dette for hendes erstatning?",
     options: [
-      "Ja, da opholdet er under 12 måneder, dækker ulykkesforsikringen midlertidige ophold i hele verden.",
-      "Nej, ulykkesforsikringen dækker slet ikke i Nordamerika.",
-      "Nej, studierejser kræver altid en særskilt erhvervsrejseforsikring.",
-      "Ja, men kun hvis hun undlader at køre i lejet bil."
+      "Hun får udbetalt 1.000.000 kr. ved totalskade, fordi hun har betalt for summen.",
+      "Hun får maksimalt 750.000 kr., da erstatningen ikke må overstige det reelle tab (Berigelsesforbuddet).",
+      "Selskabet nedsætter erstatningen med 25% pga. forkerte oplysninger.",
+      "Aftalen er ugyldig, da summen er sat bevidst for højt."
+    ],
+    answer: 1,
+    forklaring: "Sanne er overforsikret (FAL § 39). Berigelsesforbuddet sikrer, at kunden ikke må opnå en vinding ved en skade, og derfor erstattes kun de faktiske 750.000 kr."
+  },
+  {
+    id: "f1_2", kategori: "FAL",
+    spørgsmål: "Peter har indbrud og får stjålet for 100.000 kr. Hans forsikringssum er 800.000 kr., men hans faktiske samlede værdier er 1.000.000 kr. Hvad får han i erstatning?",
+    options: [
+      "100.000 kr., da tabet er lavere end summen.",
+      "80.000 kr., da han er underforsikret, og skaden udbetales forholdsmæssigt.",
+      "Ingenting, da han har opgivet forkerte værdier ved aftalens indgåelse.",
+      "800.000 kr., da summen udgør maksgrænsen."
+    ],
+    answer: 1,
+    forklaring: "Peter er underforsikret (FAL § 40). Forholdstallet mellem sum (800k) og værdi (1M) er 80%. Tabet på 100.000 kr. dækkes derfor med 80% = 80.000 kr."
+  },
+  {
+    id: "f1_3", kategori: "FAL",
+    spørgsmål: "Bettinas redskaber brænder for 10.000 kr. Hendes sum er 730.000 kr., men værdierne er reelt 550.000 kr. Hvad får hun udbetalt?",
+    options: [
+      "10.000 kr., da hendes tab kan dækkes fuldt ud af forsikringssummen og de faktiske værdier.",
+      "Ingenting, da hun er overforsikret og dermed har misligholdt aftalen.",
+      "13.272 kr., på grund af pro-rata princippet.",
+      "730.000 kr., da det er den sum hun har købt."
     ],
     answer: 0,
-    forklaring: "En ulykkesforsikring dækker midlertidigt ophold i udlandet i op til 12 måneder ad gangen."
+    forklaring: "Bettina er overforsikret, men det påvirker ikke delskader, så længe de er under både sum og reel værdi (FAL § 39). Hun får dækket sit fulde tab på 10.000 kr."
   },
   {
-    id: "a01", kategori: "Auto",
-    spørgsmål: "Rikke overser en bil ved udkørsel fra tankstation. Dækker hendes kaskoforsikring hendes egen bil?",
+    id: "f1_4", kategori: "FAL",
+    spørgsmål: "Gurli har en sum på 700.000 kr. og værdier for 600.000 kr. Hun får stjålet smykker for 50.000 kr. og sølvtøj for 30.000 kr. Hvor meget får hun i erstatning?",
     options: [
-      "Ja, kasko dækker skader på eget køretøj ved færdselsuheld, uanset skyld.",
-      "Nej, kasko dækker aldrig selvforskyldte uheld.",
-      "Ja, men kun hvis modpart mangler forsikring.",
-      "Nej, skal dækkes af tankstationen."
+      "600.000 kr.",
+      "50.000 kr.",
+      "80.000 kr., da tabet er under både forsikringssum og totalværdi.",
+      "Ingenting pga. overforsikring."
+    ],
+    answer: 2,
+    forklaring: "Gurli er overforsikret (FAL § 39), og får udbetalt sit reelle tab på i alt 80.000 kr., forudsat der ikke er specifikke interne beløbsgrænser for særligt indbo."
+  },
+
+  // Fra Fil 2: Aftaleloven
+  {
+    id: "f2_1", kategori: "AFTL",
+    spørgsmål: "Du giver et mundtligt tilbud på 1.500 kr., som kunden 'vil tænke over'. Senere på dagen ringer kunden og accepterer, men prisen skulle have været 1.800 kr. Er aftalen til 1.500 kr. bindende?",
+    options: [
+      "Ja, mundtlige tilbud gælder 24 timer.",
+      "Ja, tilbud og accept matcher hinanden.",
+      "Nej, et mundtligt tilbud falder bort, hvis det ikke accepteres straks (AFTL § 3).",
+      "Ja, men selskabet kan annullere aftalen inden for 14 dage."
+    ],
+    answer: 2,
+    forklaring: "Jf. AFTL § 3, stk. 2 skal mundtlige tilbud accepteres straks uden aftalt frist. Kundens henvendelse senere på dagen anses som et nyt tilbud (AFTL § 1)."
+  },
+  {
+    id: "f2_2", kategori: "AFTL",
+    spørgsmål: "Frank modtager et skriftligt tilbud på 32.000 kr. i erstatning. Han retter beløbet til 35.000 kr., underskriver og returnerer. Skal selskabet betale 35.000 kr.?",
+    options: [
+      "Ja, han har returneret dokumentet med en gyldig underskrift.",
+      "Nej, da han har ændret i tilbuddet, betragtes det som et afslag og et nyt tilbud (AFTL § 6).",
+      "Ja, fordi selskabet oprindeligt sendte ham tilbuddet.",
+      "Nej, han har dermed mistet retten til erstatning helt."
+    ],
+    answer: 1,
+    forklaring: "AFTL § 6 fastslår, at en 'uren accept' (med ændringer) fungerer som et afslag på det oprindelige tilbud i forening med et helt nyt tilbud fra kunden, som selskabet nu frit kan afvise."
+  },
+  {
+    id: "f2_3", kategori: "AFTL",
+    spørgsmål: "Kathe får på en messe i weekenden en flyer med en acceptfrist, der kun gælder weekenden ud. Hun mailer sin accept mandag. Er der en bindende aftale?",
+    options: [
+      "Nej, når acceptfristen er overskredet, betragtes hendes svar som et nyt tilbud (AFTL § 2 & 4).",
+      "Ja, fordi hun gjorde det hurtigst muligt efter helgen.",
+      "Ja, for skriftlige tilbud gælder altid 8 dage ifølge loven.",
+      "Nej, fordi flyers aldrig kan betragtes som juridiske tilbud."
     ],
     answer: 0,
-    forklaring: "Kaskoforsikringen dækker skader på eget køretøj uanset hvem der er skyld i uheldet."
+    forklaring: "Når fristen for accept overskrides, forfalder det oprindelige tilbud. Kathes mail mandag er derfor et helt nyt tilbud (AFTL § 4), som selskabet frit kan afvise."
   },
   {
-    id: "h01", kategori: "Hus",
-    spørgsmål: "En orkan blæser 5 kvm tag af Peters hus og ødelægger hækken. Hvad dækker husforsikringen?",
+    id: "f2_4", kategori: "AFTL",
+    spørgsmål: "Du giver en kunde 10% rabat i telefonen, selvom chefen har sagt, du ikke må (overskridelse af bemyndigelse). Er selskabet bundet af rabatten?",
     options: [
-      "Både tag og hæk fuldt ud.",
-      "Tagskaden dækkes, mens hække og beplantning normalt er undtaget.",
-      "Intet, orkan er force majeure.",
-      "Kun hækken dækkes."
+      "Nej, en medarbejder kan aldrig binde selskabet ud over sin bemyndigelse.",
+      "Nej, kunden skal selv kende til selskabets interne rabatregler.",
+      "Ja, du har handlet inden for din legitimation, og kunden var i god tro (AFTL § 10 & 11).",
+      "Ja, men selskabet kan frit opkræve beløbet næste måned."
     ],
-    answer: 1,
-    forklaring: "Stormdækningen gælder bygningsskader. Beplantning og hække er som udgangspunkt undtaget."
+    answer: 2,
+    forklaring: "Selvom sælger handlede uden for bemyndigelse, var det inden for dennes 'legitimation' (hvad kunden rimeligvis kan forvente af en sælger). Aftalen binder frem til næste hovedforfald."
   },
   {
-    id: "i01", kategori: "Indbo",
-    spørgsmål: "Mette får stjålet sin cykel fra en garage. Hvad er kravet for at indboforsikringen dækker tyveriet?",
+    id: "f2_5", kategori: "FAL",
+    spørgsmål: "Gurli køber indboforsikring på nettet 'til hurtigst mulig ikrafttræden'. Selskabet har ikke behandlet sagen endnu, da hun får indbrud en uge efter. Er hun dækket?",
     options: [
-      "Cyklen behøver ikke være låst i garage.",
-      "Cyklen skal have været fastlåst med en udstyrsgodkendt lås.",
-      "Garagen skal have været aflåst med hængelås.",
-      "Cyklen skal være under 2 år gammel."
+      "Nej, der er ikke fremsendt en gyldig police endnu.",
+      "Ja, reglen om fremrykket accept (FAL § 11) gør, at selskabet dækker, da de ville have accepteret begæringen.",
+      "Kun hvis hun havde betalt første opkrævning med dankort.",
+      "Nej, der er ingen aftale ifølge Aftalelovens hovedregler."
     ],
     answer: 1,
-    forklaring: "Det er en grundlæggende betingelse på cykeldækningen, at cyklen er aflåst med en godkendt lås."
+    forklaring: "For forsikringer gælder fremrykket accept jf. FAL § 11. Ansvaret indtræder allerede, når kunden accepterer, hvis selskabet efter sine regler alligevel ville have antaget kunden."
   },
   {
-    id: "f01", kategori: "Forsikringsaftaleloven",
-    spørgsmål: "Hvad er konsekvensen, hvis kunden svigagtigt fortier oplysninger ved tegningsafgivelse (FAL § 4)?",
+    id: "f2_6", kategori: "AFTL",
+    spørgsmål: "En forsikringssælger laver en aftale om at købe 30 iPhones til selskabet af en kunde. Er forsikringsselskabet bundet af købet?",
     options: [
-      "Selskabet betaler halv erstatning.",
-      "Selskabet er helt fri for ansvar, og aftalen er ugyldig.",
-      "Kunden får et gebyr, men skaden udbetales.",
-      "Aftalen fortsætter uændret."
+      "Nej, sælgeren handlede uden for både bemyndigelse og legitimation, hvilket kunden burde vide (AFTL § 10).",
+      "Ja, mundtlige aftaler er bindende uanset indhold.",
+      "Ja, men sælgeren hæfter personligt for regningen.",
+      "Nej, kun skriftlige hardware-indkøb er gyldige."
     ],
-    answer: 1,
-    forklaring: "Svigagtig fortielse fritager selskabet fuldstændigt for dækningspligt."
+    answer: 0,
+    forklaring: "Sælgeren har hverken bemyndigelse eller legitimation til at købe hardware for selskabet. Enhver kunde bør indse, at en forsikringssælger ikke agerer IT-indkøber."
   }
 ];
 
-function hentGemteFejl() {
-    const gemt = localStorage.getItem("idd_fejl_sporgsmal");
-    return gemt ? JSON.parse(gemt) : [];
-}
-
-function gemFejlID(id) {
-    let fejlliste = hentGemteFejl();
-    if (!fejlliste.includes(id)) {
-        fejlliste.push(id);
-        localStorage.setItem("idd_fejl_sporgsmal", JSON.stringify(fejlliste));
-    }
-    opdaterFejlTæller();
-}
-
-function fjernFejlID(id) {
-    let fejlliste = hentGemteFejl();
-    fejlliste = fejlliste.filter(fId => fId !== id);
-    localStorage.setItem("idd_fejl_sporgsmal", JSON.stringify(fejlliste));
-    opdaterFejlTæller();
-}
-
-function opdaterFejlTæller() {
-    const ant = hentGemteFejl().length;
-    const opt = document.getElementById("fejl-option");
-    if (opt) opt.innerText = `❌ Mine fejl (${ant})`;
-}
-
+// -------------------------------------------------------------
+// OPGAVE-LOGIK (TRÆNING)
+// -------------------------------------------------------------
 let aktiveOpgaver = [];
 let currentIndex = 0;
 let correctCount = 0;
 
-function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
+function hentGemteFejl() { return JSON.parse(localStorage.getItem("idd_fejl") || "[]"); }
+function gemFejlID(id) {
+    let list = hentGemteFejl();
+    if (!list.includes(id)) { list.push(id); localStorage.setItem("idd_fejl", JSON.stringify(list)); }
+    opdaterFejl();
+}
+function fjernFejlID(id) {
+    let list = hentGemteFejl().filter(x => x !== id);
+    localStorage.setItem("idd_fejl", JSON.stringify(list));
+    opdaterFejl();
+}
+function opdaterFejl() {
+    const opt = document.getElementById("fejl-option");
+    if (opt) opt.innerText = `❌ Mine fejl (${hentGemteFejl().length})`;
 }
 
+function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
 function filterAndRestart() {
-    const valgtKategori = document.getElementById("category-select").value;
-    if (valgtKategori === "alle") {
-        aktiveOpgaver = shuffle([...alleOpgaver]);
-    } else if (valgtKategori === "fejl") {
-        const fejlIDs = hentGemteFejl();
-        const filtreret = alleOpgaver.filter(q => fejlIDs.includes(q.id));
-        if (filtreret.length === 0) {
-            alert("Du har ingen gemte fejl i øjeblikket! 🎉");
-            document.getElementById("category-select").value = "alle";
-            filterAndRestart();
-            return;
-        }
-        aktiveOpgaver = shuffle([...filtreret]);
-    } else {
-        const filtreret = alleOpgaver.filter(q => q.kategori === valgtKategori);
-        aktiveOpgaver = shuffle([...filtreret]);
-    }
-    currentIndex = 0;
-    correctCount = 0;
+    const valg = document.getElementById("category-select").value;
+    if (valg === "alle") aktiveOpgaver = shuffle([...alleOpgaver]);
+    else if (valg === "fejl") {
+        const errs = hentGemteFejl();
+        aktiveOpgaver = shuffle(alleOpgaver.filter(q => errs.includes(q.id)));
+        if(aktiveOpgaver.length === 0) { alert("Ingen fejl gemt! Godt gået 🎉"); document.getElementById("category-select").value = "alle"; filterAndRestart(); return; }
+    } 
+    else aktiveOpgaver = shuffle(alleOpgaver.filter(q => q.kategori === valg));
+    
+    currentIndex = 0; correctCount = 0;
     loadQuestion();
 }
 
 function loadQuestion() {
-    if (!aktiveOpgaver || aktiveOpgaver.length === 0) return;
+    if (!aktiveOpgaver.length) return;
     const q = aktiveOpgaver[currentIndex];
     document.getElementById("category-tag").innerText = q.kategori;
     document.getElementById("question-text").innerText = q.spørgsmål;
     document.getElementById("explanation-box").style.display = "none";
     document.getElementById("next-btn").style.display = "none";
-    
-    const procentFyldt = ((currentIndex) / aktiveOpgaver.length) * 100;
-    document.getElementById("progress-bar-fill").style.width = procentFyldt + "%";
+    document.getElementById("progress-bar-fill").style.width = (currentIndex / aktiveOpgaver.length * 100) + "%";
 
     const container = document.getElementById("options-container");
     container.innerHTML = "";
-
-    q.options.forEach((opt, index) => {
+    q.options.forEach((opt, i) => {
         const btn = document.createElement("button");
         btn.className = "btn";
         btn.innerText = opt;
-        btn.onclick = () => checkAnswer(index);
+        btn.onclick = () => checkAnswer(i, btn);
         container.appendChild(btn);
     });
-
     document.getElementById("score-board").innerText = `Spørgsmål ${currentIndex + 1} af ${aktiveOpgaver.length}`;
-    document.getElementById("live-score").innerText = `Rigtige: ${correctCount} / ${currentIndex}`;
+    document.getElementById("live-score").innerText = `Rigtige: ${correctCount}`;
 }
 
-function checkAnswer(selectedIndex) {
+function checkAnswer(selIdx, btnClicked) {
     const q = aktiveOpgaver[currentIndex];
-    const buttons = document.querySelectorAll("#options-container .btn");
+    const btns = document.querySelectorAll("#options-container .btn");
+    
+    if (selIdx === q.answer) { correctCount++; fjernFejlID(q.id); } 
+    else { gemFejlID(q.id); }
 
-    if (selectedIndex === q.answer) {
-        correctCount++;
-        fjernFejlID(q.id);
-    } else {
-        gemFejlID(q.id);
-    }
-
-    buttons.forEach((btn, index) => {
-        btn.disabled = true;
-        if (index === q.answer) btn.classList.add("correct");
-        if (index === selectedIndex && selectedIndex !== q.answer) btn.classList.add("wrong");
+    btns.forEach((b, i) => {
+        b.disabled = true;
+        if (i === q.answer) b.classList.add("correct");
+        if (i === selIdx && selIdx !== q.answer) b.classList.add("wrong");
     });
 
     document.getElementById("explanation-text").innerText = q.forklaring;
     document.getElementById("explanation-box").style.display = "block";
     document.getElementById("next-btn").style.display = "block";
-    document.getElementById("live-score").innerText = `Rigtige: ${correctCount} / ${currentIndex + 1}`;
 }
 
 function nextQuestion() {
     currentIndex++;
-    if (currentIndex < aktiveOpgaver.length) {
-        loadQuestion();
-    } else {
+    if (currentIndex < aktiveOpgaver.length) loadQuestion();
+    else {
         document.getElementById("progress-bar-fill").style.width = "100%";
-        const procent = Math.round((correctCount / aktiveOpgaver.length) * 100);
-        let resultatTekst = procent >= 80 ? "BESTÅET! 🎉" : "IKKE BESTÅET 📚";
-
-        document.getElementById("question-text").innerText = `Træning afsluttet: ${resultatTekst}`;
         document.getElementById("options-container").innerHTML = `
             <div style="text-align:center; padding:10px;">
-                <p style="font-size:13px;">Du fik <strong>${correctCount} / ${aktiveOpgaver.length}</strong> rigtige (${procent}%).</p>
-                <div style="margin: 8px 0; background: #131f24; padding: 10px; border-radius: 10px; border: 2px solid var(--border-dark);">
-                    <label style="font-weight:800; font-size:11px;">Gem din score:</label>
-                    <input type="text" id="player-name-input" placeholder="Indtast navn" style="margin-top:4px;">
-                    <button class="login-btn" onclick="gemScoreOnline(${correctCount}, ${procent})">Gem score 🏆</button>
-                </div>
-                <button class="restart-btn" onclick="filterAndRestart()">Prøv igen 🔄</button>
-                <button class="restart-btn" style="background:#233642;" onclick="gaaTilForside()">Til menu 🏠</button>
+                <h3 style="margin-top:0;">Træning afsluttet!</h3>
+                <p>Du fik ${correctCount} af ${aktiveOpgaver.length} rigtige.</p>
+                <button class="restart-btn" onclick="filterAndRestart()">Prøv Igen 🔄</button>
             </div>
         `;
         document.getElementById("explanation-box").style.display = "none";
         document.getElementById("next-btn").style.display = "none";
-        document.getElementById("category-tag").innerText = "Resultat";
-        document.getElementById("score-board").innerText = "Afsluttet";
     }
 }
 
-let eksamensOpgaver = [];
-let eksamensIndex = 0;
-let brugerSvar = [];
-let eksamensSekunder = 3600;
-let timerInterval = null;
-
-function startEksamen() {
-    let tempPool = [];
-    while (tempPool.length < 40) {
-        tempPool = tempPool.concat(shuffle([...alleOpgaver]));
-    }
-    eksamensOpgaver = tempPool.slice(0, 40);
-    eksamensIndex = 0;
-    brugerSvar = new Array(40).fill(null);
-    eksamensSekunder = 3600;
-
-    document.getElementById("exam-start-card").style.display = "none";
-    document.getElementById("exam-quiz-card").style.display = "flex";
-
-    startTimer();
-    visEksamensSporgsmal();
-}
-
-function startTimer() {
-    clearInterval(timerInterval);
-    opdaterTimerVisning();
-    timerInterval = setInterval(() => {
-        eksamensSekunder--;
-        opdaterTimerVisning();
-        if (eksamensSekunder <= 0) {
-            clearInterval(timerInterval);
-            alert("Tiden er udløbet!");
-            afslutEksamen();
+// -------------------------------------------------------------
+// ROLLESPIL / SAMTALE LOGIK
+// -------------------------------------------------------------
+const cases = {
+    case1: {
+        titel: "Henrik - Det Mundtlige Tilbud",
+        steps: {
+            start: {
+                sensor: "Kunde (Henrik): Hej! Jeg talte med dig for 3 timer siden, hvor du tilbød mig en ulykkesforsikring til 1.500 kr. Jeg sagde, at jeg lige ville tænke over det. Nu har jeg tænkt over det, og jeg vil gerne takke ja!",
+                options: [
+                    { text: "Fantastisk Henrik! Da du svarer inden for 24 timer, er aftalen lukket til 1.500 kr.", rigtig: false, feedback: "Husk AFTL § 3, stk. 2: Et mundtligt tilbud, der ikke accepteres straks, falder bort.", next: "fejl_1" },
+                    { text: "Det lyder godt! Da du ikke takkede ja straks, er det dog formelt et nyt tilbud fra dig. Men lad mig kigge på det.", rigtig: true, feedback: "Korrekt! Henrik afgav ikke accept straks, så tilbuddet faldt bort.", next: "step_2" }
+                ]
+            },
+            fejl_1: {
+                sensor: "Kunde (Henrik): Perfekt, så forventer jeg en police på 1.500 kr.",
+                options: [
+                    { text: "Hov vent, min chef siger prisen nu er 1.800 kr. Det gælder alligevel ikke.", rigtig: false, feedback: "Du har lige bekræftet tilbuddet. Nu har du et problem med bemyndigelse/legitimation.", next: "slut_fejl" },
+                    { text: "Jeg opdager desværre lige, at jeg beregnede forkert før. Det skulle være 1.800 kr., og juridisk set var mit første tilbud faldet bort.", rigtig: true, feedback: "Godt reddet. Du bruger Aftaleloven til at forklare situationen.", next: "step_2" }
+                ]
+            },
+            step_2: {
+                sensor: "Kunde (Henrik): Et nyt tilbud? Hvad mener du? Jeg siger jo bare ja til det du tilbød mig før?",
+                options: [
+                    { text: "Mundtlige tilbud skal ifølge Aftaleloven accepteres straks for at være bindende, da vi ikke aftalte en frist.", rigtig: true, feedback: "Helt rigtigt! (AFTL § 3). Du forklarer juraen pænt for kunden.", next: "slut_succes" },
+                    { text: "Vores IT-system sletter automatisk prisen efter 1 time, så jeg er nødt til at lave et nyt.", rigtig: false, feedback: "Som rådgiver skal du henvise til de juridiske rammer, ikke bare skyde skylden på IT.", next: "slut_fejl" }
+                ]
+            },
+            slut_succes: {
+                sensor: "Sensor: Fremragende rådgivning! Du kender reglerne for mundtlige tilbud, acceptfrister og evner at formidle dem professionelt til kunden.",
+                options: []
+            },
+            slut_fejl: {
+                sensor: "Sensor: Det gik ikke helt godt. Du skal huske at mundtlige tilbud falder bort uden straks-accept (AFTL § 3), og du må ikke binde selskabet fejlagtigt.",
+                options: []
+            }
         }
-    }, 1000);
+    },
+    case2: {
+        titel: "Sanne - Overforsikringen",
+        steps: {
+            start: {
+                sensor: "Kunde (Sanne): Hej, min forsikringssum lyder på 1.000.000 kr., men jeg har altså kun værdier for ca. 750.000 kr. Får jeg så 1 mio., hvis hele mit hus brænder?",
+                options: [
+                    { text: "Nej, du vil maksimalt få udbetalt 750.000 kr. på grund af berigelsesforbuddet.", rigtig: true, feedback: "Korrekt (FAL § 39). Man må ikke tjene på en skade.", next: "step_2" },
+                    { text: "Ja da! Du betaler jo præmie for 1 million, så det er dét, du har krav på.", rigtig: false, feedback: "Forkert! Det strider imod berigelsesforbuddet i FAL.", next: "slut_fejl" }
+                ]
+            },
+            step_2: {
+                sensor: "Kunde (Sanne): Okay, det giver mening. Men hvad med den præmie jeg har betalt for meget? Får jeg den tilbage?",
+                options: [
+                    { text: "Ja, selskabet skal tilbagebetale præmien for den del af summen, der overstiger dine reelle værdier.", rigtig: true, feedback: "Rigtigt! Reglen om nedsættelse af sum og tilbagebetaling gælder.", next: "slut_succes" },
+                    { text: "Nej, det er kundens eget ansvar at sikre, at summen passer fra start af.", rigtig: false, feedback: "Forkert. Ved overforsikring skal den overskydende præmie retur.", next: "slut_fejl" }
+                ]
+            },
+            slut_succes: { sensor: "Sensor: Flot! Du har helt styr på FAL § 39, overforsikring og berigelsesforbuddet.", options: [] },
+            slut_fejl: { sensor: "Sensor: Du missede de centrale dele i FAL § 39 omkring overforsikring. Prøv igen!", options: [] }
+        }
+    }
+};
+
+let nuvCaseId = "case1";
+let nuvStepId = "start";
+
+function startNyCase() {
+    nuvCaseId = document.getElementById("case-select").value;
+    nuvStepId = "start";
+    document.getElementById("dialog-history").innerHTML = "";
+    document.getElementById("dialog-next-btn").style.display = "none";
+    document.getElementById("dialog-restart-btn").style.display = "none";
+    renderDialogStep();
 }
 
-function nulstilEksamensTimer() { clearInterval(timerInterval); }
+function renderDialogStep() {
+    const stepData = cases[nuvCaseId].steps[nuvStepId];
+    
+    // Vis Sensor bubble
+    const hist = document.getElementById("dialog-history");
+    hist.innerHTML += `<div class="bubble bubble-sensor">${stepData.sensor}</div>`;
+    hist.scrollTop = hist.scrollHeight;
 
-function opdaterTimerVisning() {
-    const min = Math.floor(eksamensSekunder / 60);
-    const sek = eksamensSekunder % 60;
-    document.getElementById("exam-timer").innerText = `⏱️ ${min}:${sek < 10 ? '0' : ''}${sek}`;
-}
+    const optCont = document.getElementById("dialog-options");
+    optCont.innerHTML = "";
+    document.getElementById("dialog-feedback").innerText = "";
 
-function visEksamensSporgsmal() {
-    const q = eksamensOpgaver[eksamensIndex];
-    document.getElementById("exam-progress").innerText = `Spørgsmål ${eksamensIndex + 1} af 40`;
-    document.getElementById("exam-category-tag").innerText = q.kategori;
-    document.getElementById("exam-question-text").innerText = q.spørgsmål;
+    if (stepData.options.length === 0) {
+        document.getElementById("dialog-restart-btn").style.display = "block";
+        return;
+    }
 
-    const container = document.getElementById("exam-options-container");
-    container.innerHTML = "";
-
-    q.options.forEach((opt, index) => {
+    stepData.options.forEach((opt, idx) => {
         const btn = document.createElement("button");
         btn.className = "btn";
-        if (brugerSvar[eksamensIndex] === index) btn.classList.add("selected");
-        btn.innerText = opt;
-        btn.onclick = () => {
-            brugerSvar[eksamensIndex] = index;
-            visEksamensSporgsmal();
-        };
-        container.appendChild(btn);
+        btn.innerText = opt.text;
+        btn.onclick = () => handleDialogChoice(opt);
+        optCont.appendChild(btn);
     });
-
-    document.getElementById("exam-next-btn").innerText = eksamensIndex === eksamensOpgaver.length - 1 ? "Aflever 🏁" : "Næste →";
 }
 
-function naesteEksamensSporgsmal() {
-    if (brugerSvar[eksamensIndex] === null) { alert("Vælg et svar."); return; }
-    if (eksamensIndex < eksamensOpgaver.length - 1) {
-        eksamensIndex++;
-        visEksamensSporgsmal();
-    } else {
-        afslutEksamen();
-    }
-}
-
-function afslutEksamen() {
-    nulstilEksamensTimer();
-    let korrekte = 0;
-    eksamensOpgaver.forEach((q, i) => { if (brugerSvar[i] === q.answer) korrekte++; });
-    const procent = Math.round((korrekte / eksamensOpgaver.length) * 100);
-
-    document.getElementById("exam-quiz-card").innerHTML = `
-        <div style="text-align:center; padding:10px; margin:auto;">
-            <h2 style="color: ${procent >= 80 ? 'var(--success)' : 'var(--danger)'};">
-                ${procent >= 80 ? '🎉 BESTÅET!' : '❌ IKKE BESTÅET'}
-            </h2>
-            <p>Du fik <strong>${korrekte} / 40</strong> (${procent}%).</p>
-            <input type="text" id="exam-player-name" placeholder="Indtast navn" style="margin-top:8px;">
-            <button class="login-btn" onclick="gemScoreOnline(${korrekte}, ${procent})">Gem score 🏆</button>
-            <button class="restart-btn" onclick="gaaTilForside()">Til menu 🏠</button>
-        </div>
-    `;
-}
-
-async function opretDuel() {
-    const navn = document.getElementById("duel-spiller1-navn").value.trim();
-    if (!navn) { alert("Indtast navn."); return; }
-    const kode = "IDD-" + Math.floor(1000 + Math.random() * 9000);
-    const opgaver = shuffle([...alleOpgaver]).slice(0, 5);
-    await db.from('duels').insert([{ kode, spiller1_navn: navn, spiller1_score: 0, opgaver_json: JSON.stringify(opgaver) }]);
+function handleDialogChoice(valgtOption) {
+    const hist = document.getElementById("dialog-history");
+    hist.innerHTML += `<div class="bubble bubble-user">${valgtOption.text}</div>`;
     
-    document.getElementById("duel-menu-card").innerHTML = `
-        <h3>⚔️ Duel Oprettet!</h3>
-        <p>Send koden til din kollega:</p>
-        <h1 style="color:var(--primary);">${kode}</h1>
-        <button class="restart-btn" onclick="gaaTilForside()">Til menu 🏠</button>
-    `;
+    const feedbackEl = document.getElementById("dialog-feedback");
+    feedbackEl.innerText = valgtOption.feedback;
+    feedbackEl.style.color = valgtOption.rigtig ? "var(--success)" : "var(--danger)";
+
+    document.getElementById("dialog-options").innerHTML = "";
+    
+    nuvStepId = valgtOption.next;
+    
+    document.getElementById("dialog-next-btn").style.display = "block";
+    hist.scrollTop = hist.scrollHeight;
 }
 
-async function deltagIDuel() {
-    const navn = document.getElementById("duel-spiller2-navn").value.trim();
-    const kode = document.getElementById("duel-kode-input").value.trim().toUpperCase();
-    if (!navn || !kode) { alert("Udfyld navn og kode."); return; }
-    const { data } = await db.from('duels').select('*').eq('kode', kode).maybeSingle();
-    if (!data) { alert("Kunne ikke finde duellen."); return; }
-    alert("Duel fundet! (Spil-logik kører)");
+function naesteDialogSkridt() {
+    document.getElementById("dialog-next-btn").style.display = "none";
+    renderDialogStep();
 }
 
-async function gemScoreOnline(score, procent) {
-    const navn = (document.getElementById("player-name-input") || document.getElementById("exam-player-name"))?.value.trim();
-    if (!navn) { alert("Indtast navn."); return; }
-    await db.from('highscores').insert([{ navn, score, procent }]);
-    alert("Score gemt!");
-    skiftFane('leaderboard');
-}
+// -------------------------------------------------------------
+// EKSTRA: Eksamen & Opslagsværk (Simpel implementation)
+// -------------------------------------------------------------
+function startEksamen() { alert("Eksamens-modul aktiveret! (Placeholder)"); }
+function visOpslagsvaerk() { document.getElementById("wiki-results").innerHTML = "<p>Søg i FAL eller AFTL begreber...</p>"; }
+function sogIOpslagsvaerk() { /* Placeholder søgefunktion */ }
 
-async function hentRangliste() {
-    const tbody = document.getElementById("leaderboard-body");
-    const { data } = await db.from('highscores').select('*').order('score', { ascending: false }).limit(10);
-    if (!data || data.length === 0) { tbody.innerHTML = "<tr><td colspan='4'>Ingen scores endnu.</td></tr>"; return; }
-    tbody.innerHTML = "";
-    data.forEach((row, i) => {
-        tbody.innerHTML += `<tr><td><strong>${i+1}</strong></td><td>${row.navn}</td><td>${row.score}p</td><td>${row.procent}%</td></tr>`;
-    });
-}
-
-opdaterFejlTæller();
+opdaterFejl();
 </script>
 </body>
 </html>
