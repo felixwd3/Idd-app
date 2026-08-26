@@ -22,7 +22,6 @@
             --primary-dark: #1899d6;
         }
 
-        /* Låser skærmen fuldstændigt, så der ikke kan scrolles */
         html, body {
             height: 100%;
             margin: 0;
@@ -34,9 +33,7 @@
             box-sizing: border-box;
         }
 
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
+        *, *:before, *:after { box-sizing: inherit; }
 
         .app-container {
             display: flex;
@@ -47,53 +44,40 @@
             padding: 12px;
         }
 
-        /* Duolingo-agtig top-navigation */
-        .nav-tabs { 
-            display: flex; 
-            gap: 6px; 
-            margin-bottom: 12px; 
-            background: #0e171b; 
-            padding: 6px; 
-            border-radius: 16px; 
+        /* Top bar med tilbage-knap og titel når man er inde i et spil */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
             flex-shrink: 0;
         }
-        .tab-btn { 
-            flex: 1; 
-            padding: 10px 2px; 
-            border: none; 
-            border-radius: 12px; 
-            background: transparent; 
-            font-weight: 800; 
-            cursor: pointer; 
-            color: var(--text-muted); 
-            font-size: 11px; 
-            text-align: center; 
-            transition: all 0.2s;
+        .back-btn {
+            background: #233642;
+            border: 2px solid var(--border-dark);
+            border-bottom-width: 4px;
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 13px;
         }
-        .tab-btn.active { 
-            background: var(--card-dark); 
-            color: var(--primary); 
-            box-shadow: 0 3px 0px 0px rgba(0,0,0,0.3);
-        }
+        .back-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
-        /* Indholdsområde der tilpasser sig skærmen i stedet for at scrolle */
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
+        /* Hovedkort */
         .card { 
             background: var(--card-dark); 
             border-radius: 20px; 
-            padding: 20px; 
+            padding: 16px; 
             border: 2px solid var(--border-dark);
-            border-bottom-width: 6px; /* 3D Duolingo-effekt på kortet */
+            border-bottom-width: 6px; 
             display: flex;
             flex-direction: column;
-            height: 100%;
+            flex: 1;
+            overflow: hidden;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            margin-bottom: 10px;
         }
 
         .tag { 
@@ -103,136 +87,125 @@
             font-size: 11px; 
             font-weight: 800; 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 6px 12px; 
+            padding: 4px 10px; 
             border-radius: 20px; 
-            margin-bottom: 10px; 
+            margin-bottom: 8px; 
             align-self: flex-start;
         }
 
         .filter-box { 
-            margin-bottom: 12px; 
+            margin-bottom: 10px; 
             background: var(--card-dark); 
-            padding: 12px; 
+            padding: 10px; 
             border-radius: 16px; 
             border: 2px solid var(--border-dark);
             flex-shrink: 0;
         }
 
         select, input[type="text"] { 
-            padding: 12px; 
-            font-size: 15px; 
+            padding: 10px; 
+            font-size: 14px; 
             border-radius: 12px; 
             border: 2px solid var(--border-dark); 
             width: 100%; 
-            margin-top: 6px; 
+            margin-top: 4px; 
             background: #111a21;
             color: var(--text-main);
             outline: none;
             font-weight: 700;
         }
 
-        /* Svarknapper i Duolingo-stil */
+        /* Svarknapper */
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 8px;
+            margin-top: 8px;
+            overflow-y: auto;
             flex: 1;
-            justify-content: center;
+            padding-right: 2px;
         }
 
         .btn { 
             display: block; 
             width: 100%; 
             text-align: left; 
-            padding: 14px 16px; 
+            padding: 12px 14px; 
             border: 2px solid var(--border-dark); 
-            border-bottom-width: 5px; 
-            border-radius: 16px; 
+            border-bottom-width: 4px; 
+            border-radius: 14px; 
             background: #233642; 
             cursor: pointer; 
-            font-size: 15px; 
+            font-size: 14px; 
             font-weight: 700;
             color: var(--text-main);
+            flex-shrink: 0;
             transition: all 0.1s;
         }
-        .btn:hover:not(:disabled) { 
-            background: #293f4d; 
-        }
-        .btn:active:not(:disabled) {
-            transform: translateY(2px);
-            border-bottom-width: 2px;
-        }
+        .btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 
-        .btn.selected { 
-            background-color: #2b4655 !important; 
-            border-color: var(--primary) !important; 
-            color: var(--primary);
-        }
-
-        /* Success & Fejl farver */
         .correct { 
             background-color: #1b4d2e !important; 
             border-color: var(--success) !important; 
-            border-bottom-width: 5px !important;
+            border-bottom-width: 4px !important;
             color: #d1fae5 !important; 
         }
         .wrong { 
             background-color: #4d1b1b !important; 
             border-color: var(--danger) !important; 
-            border-bottom-width: 5px !important;
+            border-bottom-width: 4px !important;
             color: #fee2e2 !important; 
         }
 
+        /* Forklaring med indbygget scroll så den aldrig spreder sig ud over skærmen */
         .explanation { 
-            margin-top: 10px; 
-            padding: 12px; 
+            margin-top: 8px; 
+            padding: 10px; 
             background: #11261d; 
             border: 2px solid #1e4630;
-            border-radius: 14px;
-            font-size: 13px; 
+            border-radius: 12px;
+            font-size: 12px; 
             display: none; 
             color: #a7f3d0;
+            max-height: 90px;
+            overflow-y: auto;
             flex-shrink: 0;
         }
 
-        /* Duolingo hovedknap (grøn) */
         .next-btn { 
             background: var(--success); 
-            border-bottom: 5px solid var(--success-dark);
+            border-bottom: 4px solid var(--success-dark);
             color: white; 
-            border-radius: 16px; 
+            border-radius: 14px; 
             cursor: pointer; 
-            padding: 14px; 
+            padding: 12px; 
             display: none; 
             font-weight: 800; 
-            font-size: 16px;
+            font-size: 15px;
             width: 100%; 
             text-align: center;
-            margin-top: 10px;
+            margin-top: 8px;
             flex-shrink: 0;
         }
         .next-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
         .score { 
-            font-size: 13px; 
+            font-size: 12px; 
             font-weight: 800;
             color: var(--text-muted); 
-            margin-bottom: 10px; 
+            margin-bottom: 8px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             flex-shrink: 0;
         }
 
-        /* Fremgangsbar */
         .progress-bar-container {
             width: 100%;
             background: #2b414d;
-            height: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
             overflow: hidden;
             flex-shrink: 0;
         }
@@ -240,81 +213,130 @@
             height: 100%;
             background: var(--success);
             width: 0%;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: width 0.3s ease;
         }
 
         .restart-btn { 
             background: var(--primary); 
-            border-bottom: 5px solid var(--primary-dark);
+            border-bottom: 4px solid var(--primary-dark);
             color: white; 
-            border-radius: 16px; 
+            border-radius: 14px; 
             cursor: pointer; 
             font-weight: 800; 
-            font-size: 15px;
-            padding: 14px; 
+            font-size: 14px;
+            padding: 12px; 
             width: 100%; 
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .timer-badge { 
             background: var(--danger); 
             color: white; 
-            padding: 4px 10px; 
-            border-radius: 12px; 
+            padding: 4px 8px; 
+            border-radius: 10px; 
             font-weight: 800; 
-            font-size: 12px; 
+            font-size: 11px; 
         }
         
         .leaderboard-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-        .leaderboard-table th, .leaderboard-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border-dark); font-size: 13px; }
+        .leaderboard-table th, .leaderboard-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-dark); font-size: 13px; }
         .leaderboard-table th { background: #162630; color: var(--text-main); font-weight: 800; }
         
         .login-btn { 
             background: var(--primary); 
-            border-bottom: 5px solid var(--primary-dark);
+            border-bottom: 4px solid var(--primary-dark);
             color: white; 
-            border-radius: 14px; 
+            border-radius: 12px; 
             cursor: pointer; 
-            padding: 12px; 
+            padding: 10px; 
             width: 100%; 
             font-weight: 800; 
-            font-size: 15px; 
-            margin-top: 8px;
+            font-size: 14px; 
+            margin-top: 6px;
         }
 
-        .duel-box { border: 2px dashed var(--border-dark); padding: 15px; border-radius: 16px; margin-bottom: 10px; text-align: center; background: #17242c; }
-        .teams-btn { background: #5b5fc7; border-bottom: 5px solid #434699; color: white; border-radius: 14px; cursor: pointer; padding: 12px; width: 100%; font-weight: 800; font-size: 14px; margin-top: 8px; }
+        .duel-box { border: 2px dashed var(--border-dark); padding: 12px; border-radius: 14px; margin-bottom: 8px; text-align: center; background: #17242c; }
+        .teams-btn { background: #5b5fc7; border-bottom: 4px solid #434699; color: white; border-radius: 12px; cursor: pointer; padding: 10px; width: 100%; font-weight: 800; font-size: 13px; margin-top: 6px; }
 
-        /* Opslagsværk rullefelt hvis der er mange elementer */
-        .wiki-scroll {
-            overflow-y: auto;
+        /* Forside Menu Knapper (Duolingo stil) */
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            justify-content: center;
             flex: 1;
-            padding-right: 4px;
         }
-        .wiki-item { border-bottom: 1px solid var(--border-dark); padding: 12px 0; }
-        .wiki-title { font-weight: 800; color: var(--primary); font-size: 15px; margin-bottom: 4px; }
+        .menu-btn {
+            background: var(--card-dark);
+            border: 2px solid var(--border-dark);
+            border-bottom-width: 6px;
+            color: var(--text-main);
+            padding: 16px;
+            border-radius: 18px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.1s;
+        }
+        .menu-btn:active { transform: translateY(2px); border-bottom-width: 3px; }
+        .menu-btn span { font-size: 24px; }
+
+        .wiki-scroll { overflow-y: auto; flex: 1; padding-right: 4px; }
+        .wiki-item { border-bottom: 1px solid var(--border-dark); padding: 10px 0; }
+        .wiki-title { font-weight: 800; color: var(--primary); font-size: 14px; margin-bottom: 2px; }
         .wiki-cat { font-size: 10px; background: #253b47; color: var(--primary); padding: 2px 6px; border-radius: 10px; margin-left: 6px; font-weight: 800; }
-        .wiki-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+        .wiki-desc { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Navigation -->
-        <div class="nav-tabs">
-            <button id="tab-quiz" class="tab-btn active" onclick="skiftFane('quiz')">🎯 Træning</button>
-            <button id="tab-exam" class="tab-btn" onclick="skiftFane('exam')">⏱️ Eksamen</button>
-            <button id="tab-duel" class="tab-btn" onclick="skiftFane('duel')">⚔️ Duel</button>
-            <button id="tab-wiki" class="tab-btn" onclick="skiftFane('wiki')">📖 Opslag</button>
-            <button id="tab-leaderboard" class="tab-btn" onclick="skiftFane('leaderboard')">🏆 Top 10</button>
+        
+        <!-- FORSIDE / MENU SKÆRM -->
+        <div id="home-section" style="display: flex; flex-direction: column; height: 100%;">
+            <div class="card" style="justify-content: space-between; text-align: center; padding: 24px;">
+                <div>
+                    <span style="font-size: 36px;">🛡️</span>
+                    <h2 style="margin: 10px 0 5px 0; font-size: 22px;">IDD 3.58 & FOAK</h2>
+                    <p style="color: var(--text-muted); font-size: 13px; margin: 0;">Vælg en aktivitet og start træningen</p>
+                </div>
+
+                <div class="menu-grid">
+                    <button class="menu-btn" onclick="skiftFane('quiz')" style="border-color: #58cc02; background: #1b4d2e;">
+                        <span>🎯</span> <div><div>Træning</div><div style="font-size: 11px; color: #a7f3d0; font-weight: normal;">Træn emner & egne fejl</div></div>
+                    </button>
+                    <button class="menu-btn" onclick="skiftFane('exam')" style="border-color: #1cb0f6; background: #153342;">
+                        <span>⏱️</span> <div><div>Eksamenstest</div><div style="font-size: 11px; color: #bae6fd; font-weight: normal;">Officiel 60-min test (40 spørgsmål)</div></div>
+                    </button>
+                    <button class="menu-btn" onclick="skiftFane('duel')" style="border-color: #ce82ff; background: #3b1f4d;">
+                        <span>⚔️</span> <div><div>Duel</div><div style="font-size: 11px; color: #e9d5ff; font-weight: normal;">Udfordr en kollega</div></div>
+                    </button>
+                    <button class="menu-btn" onclick="skiftFane('wiki')" style="border-color: #ff9600; background: #452b11;">
+                        <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 11px; color: #fde68a; font-weight: normal;">Søg i juridiske begreber</div></div>
+                    </button>
+                    <button class="menu-btn" onclick="skiftFane('leaderboard')" style="border-color: #ffc800; background: #453c11;">
+                        <span>🏆</span> <div><div>Top 10</div><div style="font-size: 11px; color: #fef08a; font-weight: normal;">Se selskabets rangliste</div></div>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="content-area">
+        <!-- SPIL / AKTIVITETS CONTAINER (Med tilbage-knap øverst) -->
+        <div id="game-container" style="display: none; flex-direction: column; height: 100%;">
+            <div class="top-bar">
+                <button class="back-btn" onclick="gaaTilForside()">🏠 Tilbage til menu</button>
+                <span id="active-title" style="font-weight: 800; font-size: 14px; color: var(--text-muted);">TRÆNING</span>
+            </div>
+
             <!-- SEKTION 1: TRÆNING -->
-            <div id="quiz-section" style="display: flex; flex-direction: column; height: 100%;">
+            <div id="quiz-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="filter-box">
-                    <label for="category-select" style="font-weight: 800; font-size: 13px; color: var(--text-muted);">VÆLG EMNE:</label>
+                    <label for="category-select" style="font-weight: 800; font-size: 12px; color: var(--text-muted);">VÆLG EMNE:</label>
                     <select id="category-select" onchange="filterAndRestart()">
                         <option value="alle">Alle emner</option>
                         <option value="fejl" id="fejl-option">❌ Mine fejl (0)</option>
@@ -340,13 +362,13 @@
                     </div>
 
                     <span id="category-tag" class="tag">Kategori</span>
-                    <h3 id="question-text" style="margin: 5px 0 10px 0; font-size: 16px; line-height: 1.3;">Henter spørgsmål...</h3>
+                    <h3 id="question-text" style="margin: 0 0 8px 0; font-size: 15px; line-height: 1.3;">Henter spørgsmål...</h3>
                     
                     <div id="options-container" class="options-container"></div>
 
                     <div id="explanation-box" class="explanation">
                         <strong>💡 Faglig begrundelse:</strong>
-                        <p id="explanation-text" style="margin:4px 0 0 0;"></p>
+                        <p id="explanation-text" style="margin:2px 0 0 0;"></p>
                     </div>
 
                     <button id="next-btn" class="next-btn" onclick="nextQuestion()">Fortsæt →</button>
@@ -354,18 +376,13 @@
             </div>
 
             <!-- SEKTION 2: EKSAMEN -->
-            <div id="exam-section" style="display: none; flex-direction: column; height: 100%;">
+            <div id="exam-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card" id="exam-start-card" style="justify-content: center; text-align: center;">
-                    <h3 style="font-size: 20px; margin-top:0;">🎓 Officiel IDD 3.58 Eksamen</h3>
-                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.4;">
-                        Testen opfylder de officielle certificeringsrammer:
+                    <h3 style="font-size: 18px; margin-top:0;">🎓 Officiel IDD 3.58 Eksamen</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.4;">
+                        40 spørgsmål • 60 minutters tidsgrænse • Krav: Min. 80% (32/40).
                     </p>
-                    <ul style="font-size: 13px; color: var(--text-muted); padding-left: 20px; text-align: left; line-height: 1.5; margin: 15px auto;">
-                        <li><strong>40 spørgsmål</strong> tilfældigt udvalgt.</li>
-                        <li><strong>60 minutters tidsgrænse</strong>.</li>
-                        <li>Krav for bestået: <strong>Mindst 80% (32/40)</strong>.</li>
-                    </ul>
-                    <button class="login-btn" style="padding: 14px;" onclick="startEksamen()">Start Eksamen 🚀</button>
+                    <button class="login-btn" style="padding: 12px; margin-top: 15px;" onclick="startEksamen()">Start Eksamen 🚀</button>
                 </div>
 
                 <div class="card" id="exam-quiz-card" style="display: none;">
@@ -374,7 +391,7 @@
                         <span id="exam-timer" class="timer-badge">⏱️ 60:00</span>
                     </div>
                     <span id="exam-category-tag" class="tag">Kategori</span>
-                    <h3 id="exam-question-text" style="margin: 5px 0 10px 0; font-size: 16px; line-height: 1.3;">Henter spørgsmål...</h3>
+                    <h3 id="exam-question-text" style="margin: 0 0 8px 0; font-size: 15px; line-height: 1.3;">Henter spørgsmål...</h3>
                     
                     <div id="exam-options-container" class="options-container"></div>
 
@@ -383,22 +400,19 @@
             </div>
 
             <!-- SEKTION 3: DUEL -->
-            <div id="duel-section" style="display: none; flex-direction: column; height: 100%;">
+            <div id="duel-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card" id="duel-menu-card" style="overflow-y: auto;">
-                    <h3 style="font-size: 18px; margin-top:0;">⚔️ Duellér mod en kollega</h3>
-                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">Spil 5 tilfældige spørgsmål og udfordr en kollega!</p>
-                    
-                    <div class="duel-box">
-                        <h4 style="margin:0 0 5px 0; font-size:14px;">Opret ny udfordring</h4>
+                    <h3 style="font-size: 16px; margin-top:0;">⚔️ Duellér mod en kollega</h3>
+                    <div class="duel-box" style="margin-top: 10px;">
+                        <h4 style="margin:0 0 4px 0; font-size:13px;">Opret ny udfordring</h4>
                         <input type="text" id="duel-spiller1-navn" placeholder="Indtast dit navn">
                         <button class="login-btn" onclick="opretDuel()">Opret Duel 🚀</button>
                     </div>
-
                     <div class="duel-box" style="border-color: var(--primary); background: #15222b;">
-                        <h4 style="margin:0 0 5px 0; font-size:14px; color: var(--primary);">Deltag i duel</h4>
-                        <input type="text" id="duel-spiller2-navn" placeholder="Indtast dit navn" style="margin-bottom:6px;">
-                        <input type="text" id="duel-kode-input" placeholder="Indtast duel-kode (f.eks. IDD-1234)">
-                        <button class="login-btn" style="background-color: var(--success); border-bottom-color: var(--success-dark);" onclick="deltagIDuel()">Tag Udfordringen ⚔️</button>
+                        <h4 style="margin:0 0 4px 0; font-size:13px; color: var(--primary);">Deltag i duel</h4>
+                        <input type="text" id="duel-spiller2-navn" placeholder="Indtast dit navn" style="margin-bottom:4px;">
+                        <input type="text" id="duel-kode-input" placeholder="Indtast duel-kode">
+                        <button class="login-btn" style="background-color: var(--success);" onclick="deltagIDuel()">Tag Udfordringen ⚔️</button>
                     </div>
                 </div>
 
@@ -407,33 +421,28 @@
                         <span id="duel-progress">Spørgsmål 1 af 5</span>
                         <span id="duel-status-tag" class="tag">Duel</span>
                     </div>
-                    <h3 id="duel-question-text" style="margin: 5px 0 10px 0; font-size: 16px;">Henter spørgsmål...</h3>
+                    <h3 id="duel-question-text" style="margin: 0 0 8px 0; font-size: 15px;">Henter spørgsmål...</h3>
                     <div id="duel-options-container" class="options-container"></div>
                     <button id="duel-next-btn" class="next-btn" style="display: block;" onclick="naesteDuelSporgsmal()">Næste →</button>
                 </div>
             </div>
 
             <!-- SEKTION 4: OPSLAGSVÆRK -->
-            <div id="wiki-section" style="display: none; flex-direction: column; height: 100%;">
+            <div id="wiki-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card">
-                    <h3 style="font-size: 18px; margin-top:0;">📖 Opslagsværk</h3>
+                    <h3 style="font-size: 16px; margin-top:0;">📖 Opslagsværk</h3>
                     <input type="text" id="wiki-search" placeholder="🔍 Søg på f.eks. Culpa, Svig..." onkeyup="sogIOpslagsvaerk()">
-                    <div class="wiki-scroll" id="wiki-results" style="margin-top: 10px;"></div>
+                    <div class="wiki-scroll" id="wiki-results" style="margin-top: 8px;"></div>
                 </div>
             </div>
 
             <!-- SEKTION 5: RANGLISTE -->
-            <div id="leaderboard-section" style="display: none; flex-direction: column; height: 100%;">
+            <div id="leaderboard-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="card" style="overflow-y: auto;">
-                    <h3 style="font-size: 18px; margin-top:0;">🏆 Selskabets Top 10</h3>
+                    <h3 style="font-size: 16px; margin-top:0;">🏆 Selskabets Top 10</h3>
                     <table class="leaderboard-table">
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Navn</th>
-                                <th>Score</th>
-                                <th>%</th>
-                            </tr>
+                            <tr><th>#</th><th>Navn</th><th>Score</th><th>%</th></tr>
                         </thead>
                         <tbody id="leaderboard-body">
                             <tr><td colspan="4">Henter rangliste...</td></tr>
@@ -442,6 +451,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 <script>
@@ -450,21 +460,46 @@ const SUPABASE_KEY = "sb_publishable_xtd5eQJYrSncTdPS6Dfzmg_jvDR6MiX";
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function skiftFane(fane) {
-    document.getElementById("quiz-section").style.display = fane === 'quiz' ? "flex" : "none";
-    document.getElementById("exam-section").style.display = fane === 'exam' ? "flex" : "none";
-    document.getElementById("duel-section").style.display = fane === 'duel' ? "flex" : "none";
-    document.getElementById("wiki-section").style.display = fane === 'wiki' ? "flex" : "none";
-    document.getElementById("leaderboard-section").style.display = fane === 'leaderboard' ? "flex" : "none";
+    document.getElementById("home-section").style.display = "none";
+    document.getElementById("game-container").style.display = "flex";
     
-    document.getElementById("tab-quiz").classList.toggle("active", fane === 'quiz');
-    document.getElementById("tab-exam").classList.toggle("active", fane === 'exam');
-    document.getElementById("tab-duel").classList.toggle("active", fane === 'duel');
-    document.getElementById("tab-wiki").classList.toggle("active", fane === 'wiki');
-    document.getElementById("tab-leaderboard").classList.toggle("active", fane === 'leaderboard');
+    const views = document.querySelectorAll(".game-view");
+    views.forEach(v => v.style.display = "none");
 
-    if (fane === 'wiki') visOpslagsvaerk();
-    if (fane === 'leaderboard') hentRangliste();
-    if (fane !== 'exam') nulstilEksamensTimer();
+    const titler = {
+        'quiz': '🎯 TRÆNING',
+        'exam': '⏱️ EKSAMEN',
+        'duel': '⚔️ DUEL',
+        'wiki': '📖 OPSLAGSVÆRK',
+        'leaderboard': '🏆 TOP 10'
+    };
+    document.getElementById("active-title").innerText = titler[fane] || '';
+
+    if (fane === 'quiz') {
+        document.getElementById("quiz-section").style.display = "flex";
+        filterAndRestart();
+    } else if (fane === 'exam') {
+        document.getElementById("exam-section").style.display = "flex";
+        document.getElementById("exam-start-card").style.display = "flex";
+        document.getElementById("exam-quiz-card").style.display = "none";
+        nulstilEksamensTimer();
+    } else if (fane === 'duel') {
+        document.getElementById("duel-section").style.display = "flex";
+        document.getElementById("duel-menu-card").style.display = "flex";
+        document.getElementById("duel-quiz-card").style.display = "none";
+    } else if (fane === 'wiki') {
+        document.getElementById("wiki-section").style.display = "flex";
+        visOpslagsvaerk();
+    } else if (fane === 'leaderboard') {
+        document.getElementById("leaderboard-section").style.display = "flex";
+        hentRangliste();
+    }
+}
+
+function gaaTilForside() {
+    nulstilEksamensTimer();
+    document.getElementById("game-container").style.display = "none";
+    document.getElementById("home-section").style.display = "flex";
 }
 
 const opslagsData = [
@@ -482,7 +517,7 @@ function visOpslagsvaerk(filtreretData = opslagsData) {
     const container = document.getElementById("wiki-results");
     if (!container) return;
     if (filtreretData.length === 0) {
-        container.innerHTML = "<p style='color:var(--text-muted); font-size:13px;'>Ingen begreber matchede din søgning.</p>";
+        container.innerHTML = "<p style='color:var(--text-muted); font-size:12px;'>Ingen begreber matchede din søgning.</p>";
         return;
     }
     let html = "";
@@ -692,13 +727,14 @@ function nextQuestion() {
         document.getElementById("question-text").innerText = `Træning afsluttet: ${resultatTekst}`;
         document.getElementById("options-container").innerHTML = `
             <div style="text-align:center; padding:10px;">
-                <p style="font-size:14px;">Du fik <strong>${correctCount} ud af ${aktiveOpgaver.length}</strong> rigtige (${procent}%).</p>
-                <div style="margin: 10px 0; background: #131f24; padding: 12px; border-radius: 12px; border: 2px solid var(--border-dark);">
-                    <label style="font-weight:800; font-size:12px;">Gem din score:</label>
-                    <input type="text" id="player-name-input" placeholder="Indtast dit navn" style="margin-top:4px;">
+                <p style="font-size:13px;">Du fik <strong>${correctCount} / ${aktiveOpgaver.length}</strong> rigtige (${procent}%).</p>
+                <div style="margin: 8px 0; background: #131f24; padding: 10px; border-radius: 10px; border: 2px solid var(--border-dark);">
+                    <label style="font-weight:800; font-size:11px;">Gem din score:</label>
+                    <input type="text" id="player-name-input" placeholder="Indtast navn" style="margin-top:4px;">
                     <button class="login-btn" onclick="gemScoreOnline(${correctCount}, ${procent})">Gem score 🏆</button>
                 </div>
                 <button class="restart-btn" onclick="filterAndRestart()">Prøv igen 🔄</button>
+                <button class="restart-btn" style="background:#233642;" onclick="gaaTilForside()">Til menu 🏠</button>
             </div>
         `;
         document.getElementById("explanation-box").style.display = "none";
@@ -799,9 +835,9 @@ function afslutEksamen() {
                 ${procent >= 80 ? '🎉 BESTÅET!' : '❌ IKKE BESTÅET'}
             </h2>
             <p>Du fik <strong>${korrekte} / 40</strong> (${procent}%).</p>
-            <input type="text" id="exam-player-name" placeholder="Indtast navn" style="margin-top:10px;">
+            <input type="text" id="exam-player-name" placeholder="Indtast navn" style="margin-top:8px;">
             <button class="login-btn" onclick="gemScoreOnline(${korrekte}, ${procent})">Gem score 🏆</button>
-            <button class="restart-btn" onclick="location.reload()">Ny eksamen 🔄</button>
+            <button class="restart-btn" onclick="gaaTilForside()">Til menu 🏠</button>
         </div>
     `;
 }
@@ -817,7 +853,7 @@ async function opretDuel() {
         <h3>⚔️ Duel Oprettet!</h3>
         <p>Send koden til din kollega:</p>
         <h1 style="color:var(--primary);">${kode}</h1>
-        <button class="restart-btn" onclick="location.reload()">Tilbage</button>
+        <button class="restart-btn" onclick="gaaTilForside()">Til menu 🏠</button>
     `;
 }
 
@@ -849,7 +885,6 @@ async function hentRangliste() {
 }
 
 opdaterFejlTæller();
-filterAndRestart();
 </script>
 </body>
 </html>
