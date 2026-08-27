@@ -91,7 +91,6 @@
         .correct { background-color: #1b4d2e !important; border-color: var(--success) !important; color: #d1fae5 !important; }
         .wrong { background-color: #4d1b1b !important; border-color: var(--danger) !important; color: #fee2e2 !important; }
 
-        /* POPUP FEEDBACK BOKS MIDT PÅ SKÆRMEN */
         .popup-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -112,8 +111,8 @@
             to { transform: translateY(0); }
         }
 
-        .popup-title { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
-        .popup-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; max-height: 100px; overflow-y: auto; }
+        .popup-title { font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+        .popup-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; max-height: 90px; overflow-y: auto; }
 
         .next-btn { 
             background: var(--success); border-bottom: 4px solid var(--success-dark);
@@ -141,7 +140,6 @@
         .bubble { padding: 10px 12px; border-radius: 14px; font-size: 12px; line-height: 1.3; max-width: 90%; word-wrap: break-word; }
         .bubble-sensor { background: #233642; border: 1px solid var(--border-dark); align-self: flex-start; border-bottom-left-radius: 4px; color: #fff; }
         .bubble-user { background: var(--primary-dark); align-self: flex-end; border-bottom-right-radius: 4px; color: #fff; }
-        .dialog-feedback { font-size: 11px; color: var(--success); font-weight: 700; text-align: center; margin-bottom: 4px; flex-shrink: 0; }
         
         .wiki-item { background: #111a21; border: 1px solid var(--border-dark); padding: 10px; border-radius: 10px; margin-bottom: 6px; }
         .wiki-title { font-weight: 800; color: var(--primary); font-size: 13px; margin-bottom: 2px; display: flex; justify-content: space-between;}
@@ -169,7 +167,7 @@
                         <span>⚔️</span> <div><div>Duel</div><div style="font-size: 10px; color: #e9d5ff; font-weight: normal;">Udfordr en kollega på tværs af pensum</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('dialog')" style="border-color: #ff4b4b; background: #4d1b1b;">
-                        <span>🗣️</span> <div><div>Rollespil (Flere flows)</div><div style="font-size: 10px; color: #fecaca; font-weight: normal;">Træn kundesamtaler i alle emner</div></div>
+                        <span>🗣️</span> <div><div>Rollespil (Flere flows)</div><div style="font-size: 10px; color: #fecaca; font-weight: normal;">Træn kundesamtaler med flere svarmuligheder</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('wiki')" style="border-color: #ff9600; background: #452b11;">
                         <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 10px; color: #fde68a; font-weight: normal;">Søg i AFTL, FAL og begreber</div></div>
@@ -214,10 +212,9 @@
                     <h3 id="question-text" style="margin: 0 0 6px 0; font-size: 13px; line-height: 1.3;">Henter spørgsmål...</h3>
                     <div id="options-container" class="options-container"></div>
 
-                    <!-- POPUP FEEDBACK BOKS -->
                     <div id="popup-feedback" class="popup-overlay">
                         <div id="popup-title" class="popup-title"><span>✅</span> Korrekt!</div>
-                        <div id="popup-text" class="popup-text">Forklaring kommer her...</div>
+                        <div id="popup-text" class="popup-text">Forklaring...</div>
                         <button class="next-btn" onclick="nextQuestion()">Fortsæt →</button>
                     </div>
                 </div>
@@ -251,7 +248,6 @@
                     <h3 id="duel-question-text" style="margin: 0 0 6px 0; font-size: 13px;">Henter spørgsmål...</h3>
                     <div id="duel-options-container" class="options-container"></div>
 
-                    <!-- POPUP FEEDBACK BOKS TIL DUEL -->
                     <div id="duel-popup-feedback" class="popup-overlay">
                         <div id="duel-popup-title" class="popup-title"><span>✅</span> Korrekt!</div>
                         <div id="duel-popup-text" class="popup-text">Forklaring...</div>
@@ -274,10 +270,15 @@
 
                 <div class="card" style="flex: 1; padding: 10px; display: flex; flex-direction: column; overflow: hidden;">
                     <div id="dialog-history" class="chat-container"></div>
-                    <div id="dialog-feedback" class="dialog-feedback"></div>
-                    <div id="dialog-options" class="options-container" style="flex-shrink: 0;"></div>
-                    <button id="dialog-next-btn" class="next-btn" onclick="naesteDialogSkridt()">Fortsæt Samtalen →</button>
-                    <button id="dialog-restart-btn" class="restart-btn" style="display: none;" onclick="startNyCase()">Prøv Igen 🔄</button>
+                    <div id="dialog-options" class="options-container" style="flex-shrink: 0; margin-top: auto;"></div>
+
+                    <!-- POPUP FEEDBACK BOKS TIL ROLLESPIL -->
+                    <div id="dialog-popup-feedback" class="popup-overlay">
+                        <div id="dialog-popup-title" class="popup-title"><span>✅</span> Godt valg!</div>
+                        <div id="dialog-popup-text" class="popup-text">Feedback...</div>
+                        <button class="next-btn" onclick="naesteDialogSkridt()">Fortsæt Samtalen →</button>
+                    </div>
+                    <button id="dialog-restart-btn" class="restart-btn" style="display: none;" onclick="startNyCase()">Prøv Rollespillet Igen 🔄</button>
                 </div>
             </div>
 
@@ -346,7 +347,7 @@ function visOpslagsvaerkResultater(data) {
 }
 
 // ==========================================
-// STOR OPGAVEPULJE PÅ TVÆRS AF ALLE KATEGORIER
+// OPGAVEPULJE
 // ==========================================
 const alleOpgaver = [
   { id: "p_1", kategori: "Produkter", spørgsmål: "Hvad dækker bilens lovpligtige ansvarsforsikring?", options: ["Skader på egen bil ved solouheld.", "Skader kunden forvolder på andres person og ting.", "Hærværk begået af ukendte personer."], answer: 1, forklaring: "Ansvarsforsikringen dækker udelukkende skader på ANDRE og deres ejendele." },
@@ -405,7 +406,6 @@ function loadQuestion() {
                 if (idx === i && !isCorrect) b.classList.add("wrong");
             });
 
-            // Vis popup boks
             const popup = document.getElementById("popup-feedback");
             const titleEl = document.getElementById("popup-title");
             const textEl = document.getElementById("popup-text");
@@ -436,7 +436,7 @@ function nextQuestion() {
 }
 
 // ==========================================
-// DUEL MOTOR (MED POPUP FEEDBACK)
+// DUEL MOTOR
 // ==========================================
 let duelKode = ""; let duelRole = null; let duelIndex = 0; let duelScore = 0; let duelOpgaver = [];
 
@@ -549,7 +549,7 @@ async function afslutDuel() {
 }
 
 // ==========================================
-// ROLLESPIL / KUNDEFLOW MOTOR
+// ROLLESPIL / KUNDEFLOW MOTOR (MED FLERE SVARMULIGHEDER)
 // ==========================================
 const cases = {
     case3: {
@@ -557,24 +557,28 @@ const cases = {
         steps: {
             start: { sensor: "Kunde: Hej, min kæreste og jeg har købt et nyt rækkehus, og vi skal vist have nogle forsikringer til det.", options: [
                 { text: "Tillykke! En husforsikring koster 4.500 kr. Skal jeg oprette den med det samme?", rigtig: false, feedback: "Fejl: Du springer behovsafdækningen over!", next: "pris_fejl" },
-                { text: "Kæmpe tillykke med huset! Må jeg stille et par spørgsmål om huset og jeres situation, så vi finder den rette dækning?", rigtig: true, feedback: "Godt! Du starter med behovsafdækning.", next: "behov_succes" }
+                { text: "Kæmpe tillykke med huset! Må jeg stille et par spørgsmål om huset og jeres situation, så vi finder den rette dækning?", rigtig: true, feedback: "Godt! Du starter med behovsafdækning.", next: "behov_succes" },
+                { text: "Det lyder dyrt med rækkehus. Har I overvejet at skifte bank også?", rigtig: false, feedback: "Fejl: Du mister fokus og forsøger mersalg før forsikringerne overhovedet er drøftet.", next: "pris_fejl" }
             ]},
             pris_fejl: { sensor: "Kunde: Øh... 4.500 kr? Jeg ved jo slet ikke, hvad der er med i den pris?", options: [
                 { text: "Lad os tage et skridt tilbage og tale om jeres behov først.", rigtig: true, feedback: "Godt reddet tilbage til strukturen.", next: "behov_succes" },
                 { text: "Vi kan bare fjerne rørskade, så bliver det billigere.", rigtig: false, feedback: "Fejl: Du prisfuserer før behov er kendt.", next: "slut_fejl" }
             ]},
             behov_succes: { sensor: "Kunde: Ja, for os på. Hvad vil du vide?", options: [
-                { text: "Hvor stort er huset, og er der nogle særlige installationer eller skjulte rør?", rigtig: true, feedback: "Relevant for husforsikringen.", next: "indbo_krydssalg" }
+                { text: "Hvor stort er huset, og er der nogle særlige installationer eller skjulte rør?", rigtig: true, feedback: "Relevant for husforsikringen.", next: "indbo_krydssalg" },
+                { text: "Hvor meget tjener I om måneden?", rigtig: false, feedback: "Fejl: Privatøkonomiske indkomstoplysninger er irrelevant for husforsikring og i strid med god skik.", next: "slut_fejl" }
             ]},
             indbo_krydssalg: { sensor: "Kunde: Huset er fra 1980 med gamle rør. Vi mangler i øvrigt også indboforsikring.", options: [
-                { text: "Skal vi ikke samle det, så I får helkunderabat og dækning for ansvar, cykler og tyveri ét sted?", rigtig: true, feedback: "Flot krydssalg og lønsomhedstænkning!", next: "tilbud_fase" }
+                { text: "Skal vi ikke samle det, så I får helkunderabat og dækning for ansvar, cykler og tyveri ét sted?", rigtig: true, feedback: "Flot krydssalg og lønsomhedstænkning!", next: "tilbud_fase" },
+                { text: "Indbo må I købe et andet sted, vi tager kun hus.", rigtig: false, feedback: "Fejl: Du misser en klassisk krydssalgsmulighed og skaber en loyal helkunde.", next: "slut_fejl" }
             ]},
             tilbud_fase: { sensor: "Kunde: Hvad nu hvis vi vælger 800.000 kr i indbosum, men kun har værdier for 500.000 kr? Får vi så 800k ved brand?", options: [
                 { text: "Nej, pga. berigelsesforbuddet (FAL § 39) får I max det reelle tab (500.000 kr.).", rigtig: true, feedback: "Knivskarpt! Du har styr på FAL § 39.", next: "accept_fase" },
                 { text: "Ja, man får altid udbetalt den sum man betaler for.", rigtig: false, feedback: "Fejl: Overforsikring dækker kun reelt tab.", next: "slut_fejl" }
             ]},
             accept_fase: { sensor: "Kunde: Det giver mening. Vi vil gerne sige ja tak til begge del fra 1. næste måned.", options: [
-                { text: "Perfekt! Aftalen er mundtligt bindende herfra (AFTL § 3). Jeg sender police.", rigtig: true, feedback: "Perfekt afslutning på samtalen!", next: "slut_succes" }
+                { text: "Perfekt! Aftalen er mundtligt bindende herfra (AFTL § 3). Jeg sender police.", rigtig: true, feedback: "Perfekt afslutning på samtalen!", next: "slut_succes" },
+                { text: "I skal først underskrive et fysisk papirbrev og sende med posten.", rigtig: false, feedback: "Fejl: Aftaler indgås gyldigt mundtligt eller digitalt i dag.", next: "slut_fejl" }
             ]},
             slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du overholdt samtalestrukturen, lavede krydssalg og ramte juraen rent.", options: [] },
             slut_fejl: { sensor: "Sensor: Samtalen faldt fra hinanden. Husk behovsafdækning og FAL-regler.", options: [] }
@@ -608,7 +612,8 @@ const cases = {
                 { text: "Det vil jeg gerne hjælpe med. Må jeg lige høre, om du evt. allerede har rejseforsikring via dit Dankort eller indbo?", rigtig: true, feedback: "Korrekt! Du overholder IDD God Skik mod dobbeltdækning.", next: "step_2" }
             ]},
             step_2: { sensor: "Kunde: Jo, jeg har vist en på mit Mastercard, men den er svær at hitte ud af.", options: [
-                { text: "Lad os sammen gennemgå hvad den dækker, så du ikke betaler for noget dobbelt.", rigtig: true, feedback: "Fremragende etisk rådgivning i kundens interesse.", next: "slut_s" }
+                { text: "Lad os sammen gennemgå hvad den dækker, så du ikke betaler for noget dobbelt.", rigtig: true, feedback: "Fremragende etisk rådgivning i kundens interesse.", next: "slut_s" },
+                { text: "Det er ligegyldigt, køb nu bare vores også for en sikkerheds skyld.", rigtig: false, feedback: "Fejl: Ukritisk mersalg krænker God Skik-reglerne.", next: "slut_f" }
             ]},
             slut_s: { sensor: "Sensor: Godt arbejde! Du handlede i kundens bedste interesse.", options: [] },
             slut_f: { sensor: "Sensor: Du brød reglerne for God Skik ved ukritisk mersalg.", options: [] }
@@ -620,8 +625,8 @@ let nuvCaseId = "case3"; let nuvStepId = "start";
 function startNyCase() {
     nuvCaseId = document.getElementById("case-select").value; nuvStepId = "start";
     document.getElementById("dialog-history").innerHTML = ""; document.getElementById("dialog-options").innerHTML = "";
-    document.getElementById("dialog-feedback").innerText = ""; document.getElementById("dialog-next-btn").style.display = "none";
     document.getElementById("dialog-restart-btn").style.display = "none";
+    document.getElementById("dialog-popup-feedback").style.display = "none";
     renderDialogStep();
 }
 function renderDialogStep() {
@@ -632,19 +637,43 @@ function renderDialogStep() {
     
     const optCont = document.getElementById("dialog-options");
     optCont.innerHTML = "";
-    if (s.options.length === 0) { document.getElementById("dialog-restart-btn").style.display = "block"; return; }
+    
+    if (s.options.length === 0) { 
+        document.getElementById("dialog-restart-btn").style.display = "block"; 
+        return; 
+    }
+    
     s.options.forEach(o => {
-        const b = document.createElement("button"); b.className = "btn"; b.innerText = o.text;
+        const b = document.createElement("button"); 
+        b.className = "btn"; 
+        b.innerText = o.text;
         b.onclick = () => {
             hist.innerHTML += `<div class="bubble bubble-user">${o.text}</div>`;
             hist.scrollTop = hist.scrollHeight;
-            const fb = document.getElementById("dialog-feedback"); fb.innerText = o.feedback + " (" + (o.rigtig ? "Korrekt" : "Forkert") + ")"; fb.style.color = o.rigtig ? "var(--success)" : "var(--danger)";
-            optCont.innerHTML = ""; nuvStepId = o.next; document.getElementById("dialog-next-btn").style.display = "block";
+            
+            const popup = document.getElementById("dialog-popup-feedback");
+            const titleEl = document.getElementById("dialog-popup-title");
+            const textEl = document.getElementById("dialog-popup-text");
+
+            if (o.rigtig) {
+                titleEl.innerHTML = '<span>✅</span> Korrekt valg!';
+                titleEl.style.color = 'var(--success)';
+            } else {
+                titleEl.innerHTML = '<span>❌</span> Ikke optimalt!';
+                titleEl.style.color = 'var(--danger)';
+            }
+            textEl.innerText = o.feedback;
+            popup.style.display = "flex";
+
+            nuvStepId = o.next;
         };
         optCont.appendChild(b);
     });
 }
-function naesteDialogSkridt() { document.getElementById("dialog-next-btn").style.display = "none"; renderDialogStep(); }
+function naesteDialogSkridt() {
+    document.getElementById("dialog-popup-feedback").style.display = "none";
+    renderDialogStep();
+}
 </script>
 </body>
 </html>
