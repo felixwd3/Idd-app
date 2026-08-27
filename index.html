@@ -92,18 +92,11 @@
         .wrong { background-color: #4d1b1b !important; border-color: var(--danger) !important; color: #fee2e2 !important; }
 
         .popup-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: #111a21;
-            border-top: 4px solid var(--border-dark);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            padding: 16px;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
-            z-index: 100;
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: #111a21; border-top: 4px solid var(--border-dark);
+            border-top-left-radius: 20px; border-top-right-radius: 20px;
+            padding: 16px; display: none; flex-direction: column; gap: 10px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.6); z-index: 100;
             animation: slideUp 0.2s ease-out;
         }
         @keyframes slideUp {
@@ -167,7 +160,7 @@
                         <span>⚔️</span> <div><div>Duel</div><div style="font-size: 10px; color: #e9d5ff; font-weight: normal;">Udfordr en kollega på tværs af pensum</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('dialog')" style="border-color: #ff4b4b; background: #4d1b1b;">
-                        <span>🗣️</span> <div><div>Rollespil (Flere flows)</div><div style="font-size: 10px; color: #fecaca; font-weight: normal;">Træn kundesamtaler med flere svarmuligheder</div></div>
+                        <span>🗣️</span> <div><div>Rollespil (4 Fulde Kundeflows)</div><div style="font-size: 10px; color: #fecaca; font-weight: normal;">Komplette rådgivningssamtaler fra A-Z</div></div>
                     </button>
                     <button class="menu-btn" onclick="skiftFane('wiki')" style="border-color: #ff9600; background: #452b11;">
                         <span>📖</span> <div><div>Opslagsværk</div><div style="font-size: 10px; color: #fde68a; font-weight: normal;">Søg i AFTL, FAL og begreber</div></div>
@@ -259,12 +252,12 @@
             <!-- SEKTION 3: SAMTALE / ROLLESPIL -->
             <div id="dialog-section" class="game-view" style="display: none; flex-direction: column; height: 100%;">
                 <div class="filter-box">
-                    <label style="font-weight: 800; font-size: 11px; color: var(--text-muted);">VÆLG ROLLESPIL / KUNDEFLOW:</label>
+                    <label style="font-weight: 800; font-size: 11px; color: var(--text-muted);">VÆLG FULDT KUNDEFLOW:</label>
                     <select id="case-select" onchange="startNyCase()">
-                        <option value="case3">🔥 Samlet Kundeflow: Ny Helkunde (Rækkehus)</option>
-                        <option value="case1">Kunde: Henrik (Forsikringens tegning / AFTL)</option>
-                        <option value="case2">Kunde: Sanne (Skadesituationen / FAL § 39)</option>
-                        <option value="case4">Kunde: Michael (Etik & Dobbeltdækning)</option>
+                        <option value="case1">🔥 Flow 1: Hus- & Indbokøb (Ny Helkunde)</option>
+                        <option value="case2">⚡ Flow 2: Bil- & Kaskorådgivning (Mersalg og Ansvar)</option>
+                        <option value="case3">⚖️ Flow 3: Uheld & Skadesag (FAL § 39, § 40 og Culpa)</option>
+                        <option value="case4">🤝 Flow 4: Rejse- & Etikrådgivning (God Skik & AFTL § 3)</option>
                     </select>
                 </div>
 
@@ -272,7 +265,6 @@
                     <div id="dialog-history" class="chat-container"></div>
                     <div id="dialog-options" class="options-container" style="flex-shrink: 0;"></div>
 
-                    <!-- POPUP FEEDBACK BOKS TIL ROLLESPIL -->
                     <div id="dialog-popup-feedback" class="popup-overlay">
                         <div id="dialog-popup-title" class="popup-title"><span>✅</span> Godt valg!</div>
                         <div id="dialog-popup-text" class="popup-text">Feedback...</div>
@@ -549,79 +541,170 @@ async function afslutDuel() {
 }
 
 // ==========================================
-// ROLLESPIL / KUNDEFLOW MOTOR (MED KORREKTE TEKSTER OG FLERE SVAR)
+// 4 FULDE KUNDEFLOWS (LANGE DIALOGER FRA A-Z)
 // ==========================================
 const cases = {
-    case3: {
-        titel: "Samlet Kundeflow: Ny Helkunde (Rækkehus)",
-        steps: {
-            start: { sensor: "Kunde: Hej, min kæreste og jeg har købt et nyt rækkehus, og vi vil gerne have styr på vores forsikringer.", options: [
-                { text: "Tillykke! En husforsikring koster 4.500 kr. Skal jeg oprette den med det samme?", rigtig: false, feedback: "Fejl: Du springer behovsafdækningen over!", next: "pris_fejl" },
-                { text: "Kæmpe tillykke med huset! Må jeg stille jer nogle uddybende spørgsmål om boligen, så vi finder den rette dækning?", rigtig: true, feedback: "Godt! Du starter med professionel behovsafdækning.", next: "behov_succes" },
-                { text: "Det lyder dyrt med rækkehus. Har I overvejet at skifte bank også?", rigtig: false, feedback: "Fejl: Du mister fokus og forsøger mersalg, før forsikringerne overhovedet er drøftet.", next: "pris_fejl" }
-            ]},
-            pris_fejl: { sensor: "Kunde: Øh... 4.500 kr? Jeg ved jo slet ikke, hvad der er inkluderet i den pris?", options: [
-                { text: "Lad os tage et skridt tilbage og tale om jeres behov først.", rigtig: true, feedback: "Godt reddet tilbage til strukturen.", next: "behov_succes" },
-                { text: "Vi kan bare fjerne rørskade, så bliver det billigere.", rigtig: false, feedback: "Fejl: Du prisfuserer, før kundens faktiske behov er afdækket.", next: "slut_fejl" }
-            ]},
-            behov_succes: { sensor: "Kunde: Ja, det lyder fornuftigt. Hvad vil du gerne vide?", options: [
-                { text: "Hvor stort er huset, og er der nogle særlige installationer eller ældre rør?", rigtig: true, feedback: "Helt korrekt! Det er helt centralt for husforsikringen.", next: "indbo_krydssalg" },
-                { text: "Hvor meget tjener I om måneden tilsammen?", rigtig: false, feedback: "Fejl: Privatøkonomiske indkomstoplysninger er irrelevante for husforsikring og i strid med god skik.", next: "slut_fejl" }
-            ]},
-            indbo_krydssalg: { sensor: "Kunde: Huset er fra 1980 med ældre rør. Vi mangler i øvrigt også en god indboforsikring.", options: [
-                { text: "Skal vi ikke samle det hele, så I får helkunderabat og dækning for ansvar, cykler og tyveri ét sted?", rigtig: true, feedback: "Flot krydssalg og stærk lønsomhedstænkning!", next: "tilbud_fase" },
-                { text: "Indbo må I købe et andet sted, vi tager kun hus.", rigtig: false, feedback: "Fejl: Du misser en oplagt krydssalgsmulighed og klyngetilknytning.", next: "slut_fejl" }
-            ]},
-            tilbud_fase: { sensor: "Kunde: Vi overvejer en indbosum på 800.000 kr., selvom vores værdier er 500.000 kr. Får vi så udbetalt 800.000 kr. ved en brand?", options: [
-                { text: "Nej, pga. berigelsesforbuddet (FAL § 39) kan erstatningen aldrig overstige det faktiske tab (500.000 kr.).", rigtig: true, feedback: "Knivskarpt! Du har fuldstændig styr på FAL § 39.", next: "accept_fase" },
-                { text: "Ja, man får altid udbetalt den sum, man betaler for i forsikringssum.", rigtig: false, feedback: "Fejl: Overforsikring dækker ikke ud over det reelle tab.", next: "slut_fejl" }
-            ]},
-            accept_fase: { sensor: "Kunde: Det giver god mening. Vi vil gerne sige ja tak til begge dele med start fra den 1. i næste måned.", options: [
-                { text: "Perfekt! Aftalen er bindende fra nu af mundtligt (AFTL § 3), og jeg sender policen digitalt.", rigtig: true, feedback: "Perfekt afslutning på samtalen!", next: "slut_succes" },
-                { text: "I skal først underskrive et fysisk papirbrev og sende det med posten.", rigtig: false, feedback: "Fejl: Forsikringsaftaler indgås gyldigt mundtligt eller digitalt.", next: "slut_fejl" }
-            ]},
-            slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du overholdt samtalestrukturen, lavede et godt krydssalg og ramte juraen rent.", options: [] },
-            slut_fejl: { sensor: "Sensor: Samtalen faldt fra hinanden. Husk den faste samtalestruktur og gældende FAL-regler.", options: [] }
-        }
-    },
     case1: {
-        titel: "Kunde: Henrik (Aftaleloven - Tilbud)",
+        titel: "🔥 Flow 1: Hus- & Indbokøb (Ny Helkunde)",
         steps: {
-            start: { sensor: "Kunde: Jeg vil gerne takke ja til det mundtlige tilbud fra tidligere i dag.", options: [
-                { text: "Da du ikke takkede ja straks under samtalen, er det faldet bort (AFTL § 3). Lad os se på en opdateret pris.", rigtig: true, feedback: "Korrekt! Mundtlige tilbud kræver straksaccept.", next: "slut" },
-                { text: "Aftalt, jeg opretter den blot til den gamle pris med det samme.", rigtig: false, feedback: "Fejl: Mundtlige tilbud bortfalder, hvis de ikke accepteres straks.", next: "slut" }
-            ]},
-            slut: { sensor: "Sensor: Øvelse slut.", options: [] }
+            start: { 
+                sensor: "Kunde: Hej, min kæreste og jeg har overtaget et rækkehus fra 1985, og vi har brug for de rette forsikringer.", 
+                options: [
+                    { text: "Tillykke! Husforsikringen koster 4.800 kr. Skal jeg oprette den med det samme?", rigtig: false, feedback: "Fejl: Du springer behovsafdækningen over og prisfokuserer for tidligt!", next: "step_pris_fejl" },
+                    { text: "Stort tillykke med rækkehuset! Må jeg stille jer nogle uddybende spørgsmål om boligen, så vi finder den helt rette dækning?", rigtig: true, feedback: "Fremragende! Du starter samtalen med professionel behovsafdækning.", next: "step_behov" }
+                ]
+            },
+            step_pris_fejl: { 
+                sensor: "Kunde: Øh... 4.800 kr? Jeg ved jo slet ikke, hvad der overhovedet er dækket i den pris?", 
+                options: [
+                    { text: "Lad os tage et skridt tilbage og gennemgå jeres behov for dækninger først.", rigtig: true, feedback: "Godt reddet! Du retter samtalen tilbage til behovsafdækning.", next: "step_behov" },
+                    { text: "Jeg kan bare fjerne rørskadedækningen, så bliver det billigere.", rigtig: false, feedback: "Fejl: Du prisfuserer uden at kende kundens risiko eller ønsker.", next: "slut_fejl" }
+                ]
+            },
+            step_behov: { 
+                sensor: "Kunde: Ja tak, det lyder fornuftigt. Hvad har du brug for at vide om huset?", 
+                options: [
+                    { text: "Hvor mange kvadratmeter er huset, og er der foretaget nyere renovering af vvs og tag?", rigtig: true, feedback: "Korrekt! Bygningsstørrelse og stand er afgørende for risikovurderingen.", next: "step_indbo" },
+                    { text: "Hvor meget har I i samlet månedsløn?", rigtig: false, feedback: "Fejl: Lønoplysninger er irrelevante for husforsikring og i strid med god skik.", next: "slut_fejl" }
+                ]
+            },
+            step_indbo: { 
+                sensor: "Kunde: Det er 130 kvm, og rørene er fra 1985. Vi mangler i øvrigt også en god indboforsikring.", 
+                options: [
+                    { text: "Skal vi ikke samle det hele her, så I får helkunderabat og samlet dækning for hus, indbo og ansvar?", rigtig: true, feedback: "Flot krydssalg! Samling af produkter giver lavere churn og øget kundeloyalitet.", next: "step_juridisk" },
+                    { text: "Indbo må I tegne i et andet selskab, vi tager os kun af huset.", rigtig: false, feedback: "Fejl: Du misser en oplagt mulighed for helkunderådgivning.", next: "slut_fejl" }
+                ]
+            },
+            step_juridisk: { 
+                sensor: "Kunde: Det er en god idé. Men hvad hvis vi sætter indbosummen til 900.000 kr., selvom vores ting kun er 500.000 kr. værd? Får vi så 900.000 udbetalt ved brand?", 
+                options: [
+                    { text: "Nej, pga. berigelsesforbuddet i FAL § 39 udbetales der aldrig mere end det faktiske tab (500.000 kr.).", rigtig: true, feedback: "Knivskarpt! Du har fuldstændig styr på overforsikring og FAL § 39.", next: "step_afslutning" },
+                    { text: "Ja, man får altid hele den valgte forsikringssum udbetalt ved totalskade.", rigtig: false, feedback: "Fejl: Man må ikke opnå en økonomisk vinding ved skadesudbetaling.", next: "slut_fejl" }
+                ]
+            },
+            step_afslutning: { 
+                sensor: "Kunde: Det giver god mening. Vi vil gerne takke ja til samlede tilbud med start fra d. 1. i næste måned.", 
+                options: [
+                    { text: "Perfekt! Aftalen er bindende fra nu af mundtligt (AFTL § 3), og jeg sender policerne digitalt.", rigtig: true, feedback: "Fremragende gennemført kundeflow!", next: "slut_succes" },
+                    { text: "I skal lige underskrive et fysisk papir og sende det med posten, før det gælder.", rigtig: false, feedback: "Fejl: Mundtlige og digitale aftaler er fuldt bindende.", next: "slut_fejl" }
+                ]
+            },
+            slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du overholdt samtalestrukturen, lavede helkundesalg og rådgav korrekt jf. FAL § 39 og AFTL § 3.", options: [] },
+            slut_fejl: { sensor: "Sensor: Samtalen faldt fra hinanden. Husk behovsafdækning og de juridiske grundregler.", options: [] }
         }
     },
     case2: {
-        titel: "Kunde: Sanne (FAL § 39 - Overforsikring)",
+        titel: "⚡ Flow 2: Bil- & Kaskorådgivning (Mersalg & Ansvar)",
         steps: {
-            start: { sensor: "Kunde: Min indbosum er sat til 1 mio. kr., men mine ting er reelt kun 750.000 kr. værd. Får jeg 1 mio. kr. ved brand?", options: [
-                { text: "Nej, berigelsesforbuddet (FAL § 39) sikrer, at du maksimalt får det reelle tab dækket (750.000 kr.).", rigtig: true, feedback: "Korrekt! Man kan ikke opnå økonomisk vinding ved skader.", next: "slut" },
-                { text: "Ja da, når du betaler for 1 mio. kr., får du også udbetalt 1 mio. kr.", rigtig: false, feedback: "Fejl: Overforsikring giver ikke ret til overkompensation.", next: "slut" }
-            ]},
-            slut: { sensor: "Sensor: Øvelse slut.", options: [] }
+            start: { 
+                sensor: "Kunde: Hej, jeg har lige købt en ny el-bil, og jeg skal bare have den billigste lovpligtige ansvarsforsikring.", 
+                options: [
+                    { text: "Modtaget! Jeg opretter ansvarsforsikringen med det samme.", rigtig: false, feedback: "Fejl: Du glemmer at afdække behovet for kaskodækning på en ny bil!", next: "step_kasko_mangel" },
+                    { text: "Tillykke med el-bilen! Da bilen er helt ny, bør vi også tale om kasko og vejhjælp. Må jeg afdække dit behov?", rigtig: true, feedback: "Godt spottet! Nye biler har stort behov for kaskodækning.", next: "step_behov_bil" }
+                ]
+            },
+            step_kasko_mangel: { 
+                sensor: "Kunde: Vent... dækker ansvarsforsikringen overhovedet, hvis jeg selv kører ind i en lygtepæl?", 
+                options: [
+                    { text: "Nej, ansvarsforsikringen dækker kun skader på andre. Skader på din egen bil kræver kaskoforsikring.", rigtig: true, feedback: "Godt rettet! Du forklarer forskellen på ansvar og kasko.", next: "step_behov_bil" },
+                    { text: "Ja da, alt er dækket på bilen.", rigtig: false, feedback: "Fejl: Vildledende rådgivning! Ansvarsforsikring dækker aldrig egen bil.", next: "slut_fejl" }
+                ]
+            },
+            step_behov_bil: { 
+                sensor: "Kunde: Okay, det var godt du sagde det! Hvad med min søn på 19 år, må han også køre i bilen?", 
+                options: [
+                    { text: "Ja, men unge førere øger risikoen. Vi skal tilvælge 'ung bruger', så du undgår forhøjet selvrisiko ved skade.", rigtig: true, feedback: "Korrekt rådgivning om fareforøgelse og brugervilkår!", next: "step_elcykel" },
+                    { text: "Ja, alle må køre den uden ændringer i policen.", rigtig: false, feedback: "Fejl: Mange selskaber har særlige selvrisikoregler for unge førere.", next: "slut_fejl" }
+                ]
+            },
+            step_elcykel: { 
+                sensor: "Kunde: Super. Jeg kører også tit på min el-cykel (25 km/t). Skal den have sin egen motorforsikring?", 
+                options: [
+                    { text: "Nej, el-cykler op til 25 km/t er omfattet af din almindelige indbo-ansvarsforsikring.", rigtig: true, feedback: "Helt rigtigt! El-cykler op til 25 km/t sidestilles med cykler.", next: "step_accept_bil" },
+                    { text: "Ja, alle eldrevne køretøjer skal have en særskilt motorforsikring.", rigtig: false, feedback: "Fejl: Kun hurtige el-cykler (speed pedelecs) kræver særskilt ansvarsforsikring.", next: "slut_fejl" }
+                ]
+            },
+            step_accept_bil: { 
+                sensor: "Kunde: Det lyder til, at du har helt styr på det. Jeg napper pakken med kasko og vejhjælp!", 
+                options: [
+                    { text: "Fremragende! Jeg sætter policen i kraft fra i dag med fremrykket accept (FAL § 11).", rigtig: true, feedback: "Flot gennemført bil- og ansvarsflow!", next: "slut_succes" }
+                ]
+            },
+            slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du fik konverteret et skrabet ansvarskøb til en fuld kaskodækning med korrekt jurarådgivning.", options: [] },
+            slut_fejl: { sensor: "Sensor: Samtalen faldt igennem på ukorrekt rådgivning om produkt og dækninger.", options: [] }
+        }
+    },
+    case3: {
+        titel: "⚖️ Flow 3: Uheld & Skadesag (FAL § 39, § 40 & Culpa)",
+        steps: {
+            start: { 
+                sensor: "Kunde: Hej, jeg har haft indbrud i min lejlighed. Tyvene har stjålet ting for 120.000 kr. Hvordan får jeg udbetalt erstatning?", 
+                options: [
+                    { text: "Det er jeg ked af at høre! Lad os gennemgå skadesanmeldelsen og din indbosum med det samme.", rigtig: true, feedback: "Professionel og empatisk start på skadesrådgivningen.", next: "step_underforsikring" },
+                    { text: "Vi sender bare 120.000 kr. til din konto i dag.", rigtig: false, feedback: "Fejl: Du opgør skaden uden verifikation af forsikringssum og faktiske værdier.", next: "slut_fejl" }
+                ]
+            },
+            step_underforsikring: { 
+                sensor: "Kunde: Min indbosum står til 500.000 kr., men mine samlede værdier i hjemmet er reelt 1.000.000 kr. Hvad betyder det for min udbetaling?", 
+                options: [
+                    { text: "Du er underforsikret med 50%. Jf. FAL § 40 (pro-rata) udbetales der derfor kun halvdelen af skaden (60.000 kr.).", rigtig: true, feedback: "Korrekt! FAL § 40 foreskriver forholdsmæssig afkortning ved underforsikring.", next: "step_nabo_skade" },
+                    { text: "Det har ingen betydning, da din sum på 500.000 kr. er højere end skaden på 120.000 kr.", rigtig: false, feedback: "Fejl: Underforsikring nedsætter alle skadesudbetalinger forholdsmæssigt.", next: "slut_fejl" }
+                ]
+            },
+            step_nabo_skade: { 
+                sensor: "Kunde: Øv, det var en dyr lektie! Tyvene ødelagde også min naboes dør i opgangen. Skal min ansvarsforsikring dække naboens dør?", 
+                options: [
+                    { text: "Nej, du har ikke handlet uagtsomt eller forsætligt (Culpa-reglen). Du er ikke erstatningsansvarlig for tyvenes skader.", rigtig: true, feedback: "Helt skarp retsforståelse af Culpa-reglen!", next: "step_forebyggelse" },
+                    { text: "Ja, din ansvarsforsikring dækker altid alle skader i din opgang.", rigtig: false, feedback: "Fejl: Erstatningsansvar kræver et grundlag (f.eks. culpa).", next: "slut_fejl" }
+                ]
+            },
+            step_forebyggelse: { 
+                sensor: "Kunde: Forstået. Hvad skal vi gøre med min indbosum fremadrettet, så jeg ikke står underforsikret igen?", 
+                options: [
+                    { text: "Vi opjusterer din indbosum til de faktiske 1.000.000 kr. fra i dag, så du er fuldt dækket fremover.", rigtig: true, feedback: "God rådgivning og forebyggelse af fremtidig underforsikring!", next: "slut_succes" }
+                ]
+            },
+            slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du forklarede FAL § 40 pro-rata og Culpa-reglen perfekt for kunden.", options: [] },
+            slut_fejl: { sensor: "Sensor: Skadesrådgivningen fejlede pga. manglende kendskab til FAL-reglerne.", options: [] }
         }
     },
     case4: {
-        titel: "Kunde: Michael (Etik & Dobbeltdækning)",
+        titel: "🤝 Flow 4: Rejse- & Etikrådgivning (God Skik & AFTL § 3)",
         steps: {
-            start: { sensor: "Kunde: Jeg vil gerne købe jeres store rejseforsikring med afbestilling.", options: [
-                { text: "Det ordner jeg med det samme, her er prisen!", rigtig: false, feedback: "Fejl: Du tjekker ikke, om kunden allerede er dækket (i strid med God Skik).", next: "slut_f" },
-                { text: "Det vil jeg meget gerne hjælpe med. Må jeg først høre, om du evt. allerede har rejseforsikring via dit Mastercard eller indbo?", rigtig: true, feedback: "Korrekt! Du overholder IDD God Skik mod unødvendig dobbeltdækning.", next: "step_2" }
-            ]},
-            step_2: { sensor: "Kunde: Jo, jeg har vist en dækning på mit Mastercard, men den er svær at gennemskue.", options: [
-                { text: "Lad os sammen gennemgå, hvad den dækker, så du ikke betaler for noget dobbelt.", rigtig: true, feedback: "Fremragende etisk rådgivning i kundens bedste interesse.", next: "slut_s" },
-                { text: "Det er ligegyldigt, køb nu bare vores forsikring også for en sikkerheds skyld.", rigtig: false, feedback: "Fejl: Ukritisk mersalg krænker IDD-reglerne om god skik.", next: "slut_f" }
-            ]},
-            slut_s: { sensor: "Sensor: Godt arbejde! Du handlede professionelt i kundens bedste interesse.", options: [] },
-            slut_f: { sensor: "Sensor: Du brød reglerne for God Skik ved ukritisk mersalg uden behovsafdækning.", options: [] }
+            start: { 
+                sensor: "Kunde: Hej, jeg vil gerne købe jeres største årsrejseforsikring med verden-dækning og afbestilling.", 
+                options: [
+                    { text: "Det lynhurtigt klaret! Den koster 2.200 kr. om året, skal jeg slå den op?", rigtig: false, feedback: "Fejl: Du tjekker ikke for dobbeltdækning jf. IDD God Skik!", next: "step_etik_fejl" },
+                    { text: "Det vil jeg meget gerne hjælpe med! Må jeg først høre, om du har rejseforsikring dækket via dine kreditkort eller indbo?", rigtig: true, feedback: "Korrekt! Du overholder etiske retningslinjer for god skik.", next: "step_kreditkort" }
+                ]
+            },
+            step_etik_fejl: { 
+                sensor: "Kunde: Vent, min bank nævnte noget om, at der var rejseforsikring i mit Gold-kort?", 
+                options: [
+                    { text: "Lad os sammen tjekke dækningen på dit kort først, så du undgår at betale dobbelt for samme dækning.", rigtig: true, feedback: "Godt reddet! Du sætter kundens behov foran hurtigt salg.", next: "step_kreditkort" },
+                    { text: "Kortforsikringer er altid dårlige, du skal bare købe vores oveni.", rigtig: false, feedback: "Fejl: Vildledende og i strid med god skik-reglerne.", next: "slut_fejl" }
+                ]
+            },
+            step_kreditkort: { 
+                sensor: "Kunde: Det viser sig, at mit kort dækker Verden, men KUN rejser op til 30 dage. Min næste rejse varer 45 dage!", 
+                options: [
+                    { text: "Så har du en reel dækningsmangel! Vi kan oprette en enkeltrejseforsikring eller en årsrejseforsikring der dækker lange rejser.", rigtig: true, feedback: "Fremragende behovsafdækning! Du finder den præcise løsning.", next: "step_aftale_afslut" }
+                ]
+            },
+            step_aftale_afslut: { 
+                sensor: "Kunde: Det sounds godt. Kan jeg 'tænke over' tilbuddet og ringe tilbage sidst på ugen og få det til samme pris?", 
+                options: [
+                    { text: "Mundtlige tilbud skal accepteres straks (AFTL § 3). Men jeg kan sende dig et skriftligt tilbud med 14 dages frist.", rigtig: true, feedback: "Knivskarp anvendelse af AFTL § 3 og god kundeservice!", next: "slut_succes" },
+                    { text: "Ja, et mundtligt tilbud gælder altid i minimum 30 dage.", rigtig: false, feedback: "Fejl: Jf. AFTL § 3 bortfalder mundtlige tilbud, hvis de ikke accepteres straks.", next: "slut_fejl" }
+                ]
+            },
+            slut_succes: { sensor: "Sensor: 🌟 FLOT KØRT! Du demonstrerede høj faglig etik (God Skik) og styr på Aftaleloven (AFTL § 3).", options: [] },
+            slut_fejl: { sensor: "Sensor: Samtalen brød med reglerne for god skik eller aftaleret.", options: [] }
         }
     }
 };
 
-let nuvCaseId = "case3"; let nuvStepId = "start";
+let nuvCaseId = "case1"; let nuvStepId = "start";
 function startNyCase() {
     nuvCaseId = document.getElementById("case-select").value; nuvStepId = "start";
     document.getElementById("dialog-history").innerHTML = ""; 
@@ -639,7 +722,7 @@ function renderDialogStep() {
     const optCont = document.getElementById("dialog-options");
     optCont.innerHTML = "";
     
-    if (s.options.length === 0) { 
+    if (!s.options || s.options.length === 0) { 
         document.getElementById("dialog-restart-btn").style.display = "block"; 
         return; 
     }
